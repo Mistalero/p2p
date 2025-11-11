@@ -3,6 +3,8 @@
 ## Overview
 The state synchronization layer uses Conflict-free Replicated Data Types (CRDT) for managing distributed data, allowing each participant to make local changes with automatic conflict resolution as updates propagate through the network.
 
+This layer has been implemented as a specialized P2P component with a detailed specification available in [state-sync-layer-spec.md](state-sync-layer-spec.md).
+
 ## Components
 
 ### CRDT Implementation
@@ -40,3 +42,13 @@ The state synchronization layer uses Conflict-free Replicated Data Types (CRDT) 
 - Efficient serialization/deserialization
 - Memory usage optimization
 - Garbage collection for tombstones
+
+## Implementation Details
+
+For detailed implementation specifications, see [state-sync-layer-spec.md](state-sync-layer-spec.md), which includes:
+
+- Complete interface definitions
+- Data model specifications
+- Protocol compatibility details
+- Security considerations
+- Implementation requirements
