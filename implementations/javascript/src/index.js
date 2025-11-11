@@ -88,4 +88,14 @@ class IdentityLayer {
   }
 }
 
+// Export IdentityLayer
 export default IdentityLayer
+
+// Export StateSyncLayer
+export { default as StateSyncLayer } from './StateSyncLayer.js'
+
+// Export SemanticAdapter
+export { default as SemanticAdapter } from './SemanticAdapter.js'
+
+// Export CRDT implementations
+export { CRDT, LWWRegister, ORSet } from './state-sync/index.js'
