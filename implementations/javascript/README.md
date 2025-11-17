@@ -35,6 +35,20 @@ This is the JavaScript implementation of the P2P layer with CRDT state synchroni
 npm install
 ```
 
+## Quick Start
+
+To run the fully functional P2P node:
+
+```bash
+npm start
+```
+
+This will start a complete P2P node with:
+- Automatic peer discovery and connection
+- State synchronization every 10 seconds
+- Interoperability with ActivityPub, Nostr, and IPFS
+- Graceful shutdown handling
+
 ## Usage
 
 ### Basic Setup
@@ -99,7 +113,9 @@ const serializedState = stateSyncLayer.serializeState()
 
 See `src/example.js` for a complete example of how to use the P2P layer.
 
-## Testing
+For a ready-to-run node implementation, see `app.js` and run with `npm start`.
+
+## Running Tests
 
 ```bash
 npm test
@@ -111,3 +127,7 @@ npm test
 - IPFS/IPLD for content addressing and storage
 - Nostr tools for key management
 - DID resolver for decentralized identity
+
+## License
+
+This project is licensed under CC0 - see the LICENSE file for details.
