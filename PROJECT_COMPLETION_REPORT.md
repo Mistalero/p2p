@@ -1,60 +1,60 @@
-# Отчет о завершении проекта: Создание децентрализованной P2P-ноды
+# Project Completion Report: Creating a Decentralized P2P Node
 
-## Общая информация
+## General Information
 
-Проект по созданию децентрализованной P2P-ноды успешно завершен.
+The project to create a decentralized P2P node has been successfully completed.
 
-## Выполненные задачи
+## Completed Tasks
 
-### 1. Архитектурные задачи
-- Создана архитектура автономной P2P-ноды
-- Реализована система хранения событий в локальном файле
-- Разработан механизм обмена событиями через TCP-соединения
-- Создана система генерации ключей для идентификации ноды
-- Реализована система слияния логов событий от разных нод
+### 1. Architectural Tasks
+- Created the architecture of an autonomous P2P node
+- Implemented a system for storing events in a local file
+- Developed a mechanism for exchanging events through TCP connections
+- Created a key generation system for node identification
+- Implemented a system for merging event logs from different nodes
 
-### 2. Сетевая инфраструктура
-- Реализована передача событий через TCP-соединения
-- Создан механизм подключения к другим нодам
-- Реализована передача логов событий при подключении
-- Создан механизм рассылки новых событий всем подключенным нодам
+### 2. Network Infrastructure
+- Implemented event transmission through TCP connections
+- Created a mechanism for connecting to other nodes
+- Implemented transmission of event logs upon connection
+- Created a mechanism for broadcasting new events to all connected nodes
 
-### 3. Система хранения
-- Реализовано хранение событий в локальном файле
-- Создан механизм добавления новых событий в лог
-- Реализована система исключения дубликатов при слиянии логов
+### 3. Storage System
+- Implemented event storage in a local file
+- Created a mechanism for adding new events to the log
+- Implemented a system for excluding duplicates when merging logs
 
-### 4. Система идентификации
-- Реализована генерация пары ключей при запуске ноды
-- Создан механизм подписи событий публичным ключом
-- Реализована проверка подлинности событий через криптографические ключи
+### 4. Identification System
+- Implemented key pair generation when starting the node
+- Created a mechanism for signing events with a public key
+- Implemented event authenticity verification through cryptographic keys
 
-### 5. Система синхронизации
-- Реализована асинхронная синхронизация событий между нодами
-- Создан механизм слияния логов без централизованного контроля
-- Реализована система воспроизведения событий в правильном порядке
+### 5. Synchronization System
+- Implemented asynchronous synchronization of events between nodes
+- Created a mechanism for merging logs without centralized control
+- Implemented a system for reproducing events in the correct order
 
-### 6. Оффлайн-работа
-- Обеспечена возможность работы ноды без подключения к сети
-- Создан механизм накопления событий в оффлайн-режиме
-- Реализована синхронизация событий при восстановлении подключения
+### 6. Offline Operation
+- Ensured the possibility of node operation without network connection
+- Created a mechanism for accumulating events in offline mode
+- Implemented event synchronization upon connection restoration
 
-## Результаты
+## Results
 
-Проект успешно завершен. Все поставленные задачи выполнены:
+The project has been successfully completed. All assigned tasks have been completed:
 
-1. ✓ Создание автономной P2P-ноды
-2. ✓ Реализация системы хранения и обмена событиями
-3. ✓ Обеспечение возможности работы в оффлайн-режиме
-4. ✓ Создание архитектуры, готовой к использованию
+1. ✓ Creation of an autonomous P2P node
+2. ✓ Implementation of event storage and exchange system
+3. ✓ Ensuring the possibility of offline operation
+4. ✓ Creation of an architecture ready for use
 
-## Дальнейшие шаги
+## Next Steps
 
-1. Тестирование и оптимизация созданной системы
-2. Создание документации для пользователей и разработчиков
-3. Разработка примеров использования и сценариев применения
-4. Подготовка к публичному релизу и распространению
+1. Testing and optimization of the created system
+2. Creation of documentation for users and developers
+3. Development of usage examples and application scenarios
+4. Preparation for public release and distribution
 
-## Статус проекта
+## Project Status
 
-**ПРОЕКТ ЗАВЕРШЕН** - Все задачи выполнены, система готова к использованию.
+**PROJECT COMPLETED** - All tasks have been completed, the system is ready for use.
