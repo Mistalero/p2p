@@ -1,33 +1,29 @@
 # JavaScript P2P Layer Implementation
 
-This is the JavaScript implementation of the P2P layer with CRDT state synchronization, IPFS/IPLD compatibility, and ActivityPub/Nostr interoperability. It provides functionality for decentralized state management and synchronization across a P2P network.
+This is the JavaScript implementation of the P2P layer. It provides functionality for decentralized state management and synchronization across a P2P network.
 
 ## Features
 
-### Identity Layer
-- Generate Nostr key pairs
-- Create DID documents in WebDID format
-- Bind DIDs to Nostr public keys through signed JWT
-- Resolve DID documents
+### Core Functionality
+- Event log storage and management
+- TCP server for incoming connections
+- Key pair generation for node identification
+- Event log merging and deduplication
+- Event broadcasting to connected nodes
+- Offline operation support
 
-### State Synchronization Layer
-- CRDT-based state synchronization
-- Conflict-free replicated data types (LWWRegister, ORSet)
-- Eventual consistency model
-- Node identification using DIDs
+### Event Structure
+Each event is a string with the following components:
+- **Timestamp**: When the event occurred.
+- **Author**: Public key of the node that created the event.
+- **Action Type**: Type of action (e.g., "move", "attack", "chat").
+- **Payload**: Data associated with the action.
 
-### Transport Layer
-- libp2p-based networking
-- Peer discovery and connection management
-- Pubsub messaging
-- DHT for content routing
-- Compatibility with IPFS/IPLD
-
-### Semantic Adapter
-- Interoperability with ActivityPub
-- Interoperability with Nostr protocol
-- Serialization for IPFS/IPLD storage
-- Schema translation between protocols
+### Event Exchange Protocol
+1. **Connection Establishment**: Nodes establish a TCP connection.
+2. **Event Log Transmission**: Each node sends its event log to the other.
+3. **Event Log Merging**: Nodes merge the received logs, excluding duplicates.
+4. **Event Broadcasting**: Nodes broadcast new events to all connected nodes.
 
 ## Installation
 
@@ -44,69 +40,60 @@ npm start
 ```
 
 This will start a complete P2P node with:
-- Automatic peer discovery and connection
-- State synchronization every 10 seconds
-- Interoperability with ActivityPub, Nostr, and IPFS
-- Graceful shutdown handling
+- Event log storage and management
+- TCP server for incoming connections
+- Key pair generation for node identification
+- Event log merging and deduplication
+- Event broadcasting to connected nodes
+- Offline operation support
 
 ## Usage
 
 ### Basic Setup
 
 ```javascript
-import { StateSyncLayer, SemanticAdapter } from './src/index.js'
-import TransportLayer from './src/TransportLayer.js'
+import P2PNode from './src/P2PNode.js'
 
-// Create a state sync layer
-const stateSyncLayer = new StateSyncLayer()
+// Create a P2P node
+const node = new P2PNode()
 
-// Create a semantic adapter
-const semanticAdapter = new SemanticAdapter(stateSyncLayer)
+// Initialize the node
+await node.initialize()
 
-// Create a transport layer
-const transportLayer = new TransportLayer(stateSyncLayer)
-
-// Initialize the transport layer
-await transportLayer.initialize()
+// Start listening for connections
+await node.startListening()
 ```
 
-### Working with CRDTs
+### Working with Events
 
 ```javascript
-// Create an LWWRegister for player position
-const positionRegister = stateSyncLayer.createCRDT('player-position', 'LWWRegister', { x: 0, y: 0, z: 0 })
+// Create an event
+const event = {
+  timestamp: Date.now(),
+  author: node.getPublicKey(),
+  actionType: 'move',
+  payload: { x: 10, y: 20, z: 0 }
+}
 
-// Create an ORSet for player inventory
-const inventorySet = stateSyncLayer.createCRDT('player-inventory', 'ORSet', ['sword', 'shield'])
+// Add the event to the local log
+node.addEvent(event)
 
-// Update the position register
-positionRegister.set({ x: 10, y: 20, z: 0 }, stateSyncLayer.getNodeId())
-
-// Add an item to the inventory set
-inventorySet.add('potion', stateSyncLayer.getNodeId())
+// Broadcast the event to all connected nodes
+node.broadcastEvent(event)
 ```
 
-### Semantic Adaptation
+### Event Handling
 
 ```javascript
-// Convert CRDTs to ActivityPub format
-const positionActivityPub = semanticAdapter.crdtToActivityPub(positionRegister)
+// Handle incoming events
+node.on('event', (event) => {
+  console.log('Received event:', event)
+})
 
-// Convert CRDTs to Nostr events
-const positionNostrEvent = semanticAdapter.crdtToNostrEvent(positionRegister, 'wss://relay.example.com')
-
-// Serialize CRDTs for IPFS/IPLD storage
-const positionIPLD = semanticAdapter.serializeForIPFS(positionRegister)
-```
-
-### State Synchronization
-
-```javascript
-// Serialize the entire state for synchronization
-const serializedState = stateSyncLayer.serializeState()
-
-// In a real implementation, we would send this state to other nodes
-// and receive state from them to merge
+// Handle new connections
+node.on('connection', (peer) => {
+  console.log('New connection from:', peer)
+})
 ```
 
 ## Example
@@ -123,10 +110,7 @@ npm test
 
 ## Dependencies
 
-- libp2p for P2P networking
-- IPFS/IPLD for content addressing and storage
-- Nostr tools for key management
-- DID resolver for decentralized identity
+- None (minimal implementation)
 
 ## License
 
