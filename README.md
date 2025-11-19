@@ -12,6 +12,8 @@ This project provides a foundational P2P layer that enables decentralized commun
 - Consensus-based validation through independent participant confirmation
 - No access rights, administrative commands, or moderators
 
+This repository serves as the core infrastructure for various decentralized applications.
+
 ## Language Implementations
 
 This repository contains multiple compatible implementations across different programming languages to ensure broad interoperability.
