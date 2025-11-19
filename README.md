@@ -1,10 +1,10 @@
-# Decentralized P2P Layer
+# Decentralized P2P Node
 
-A multi-language implementation of a decentralized peer-to-peer protocol layer designed for interoperability between different systems.
+A minimal implementation of a decentralized peer-to-peer node designed for autonomy and interoperability.
 
 ## Overview
 
-This project provides a foundational P2P layer that enables decentralized communication without requiring specialized hardware or permanent connections. The network operates on principles of:
+This project provides a foundational P2P node that enables decentralized communication without requiring specialized hardware or permanent connections. The network operates on principles of:
 
 - Immutable data chunks distributed based on demand rather than ownership
 - Cryptographic key-based node identification for authenticity without tracking
@@ -18,13 +18,7 @@ When started, the node generates a key pair, creates a file for storing events, 
 
 Each node runs a minimal set of services for exchanging data blocks, verifying integrity, and relaying requests, without requiring specialized hardware or permanent connections. Data is stored as immutable chunks distributed across the network based on their demand rather than ownership - the more frequently content is requested, the more copies of it are stored. Nodes are identified only by cryptographic keys, which allow verifying authenticity but not tracking the origin. Synchronization occurs asynchronously, without centralized time or coordination - each node accepts changes if they pass the trust chain check and match the commonly accepted logic. No access rights, administrative commands, or moderators exist - decisions about what is valid are made by consensus through repeated confirmation by multiple independent participants. The network does not store session history, does not track user behavior, does not collect metadata, and does not allow any node to influence the content except through direct offering of new chunks. Everything that works does so because someone needs it and has decided to contribute.
 
-This repository serves as the core infrastructure for various decentralized applications.
-
-## Language Implementations
-
-This repository contains multiple compatible implementations across different programming languages to ensure broad interoperability.
-
-### JavaScript Implementation (Ready to Run)
+## JavaScript Implementation (Ready to Run)
 
 The JavaScript implementation is ready to use out of the box:
 
@@ -44,12 +38,14 @@ The JavaScript implementation is ready to use out of the box:
    ```
 
 This will start a fully functional P2P node with:
-- Automatic peer discovery and connection
-- State synchronization every 10 seconds
-- Interoperability with ActivityPub, Nostr, and IPFS
-- Graceful shutdown handling
+- Event log storage and management
+- TCP server for incoming connections
+- Key pair generation for node identification
+- Event log merging and deduplication
+- Event broadcasting to connected nodes
+- Offline operation support
 
-### Docker Deployment
+## Docker Deployment
 
 You can also run the P2P node using Docker:
 
