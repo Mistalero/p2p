@@ -1,78 +1,45 @@
 # Architecture Overview
 
-## System Layers
-
-The system is built as a collection of autonomous components, each solving its own task without requiring centralized control. All layers interact asynchronously through events without blocking each other.
-
-### 1. Transport Layer (libp2p)
-- Secure connection establishment
-- Node discovery
-- Message routing
-- No dependency on third-party infrastructure
-
-### 2. State Synchronization Layer (CRDT)
-- Distributed data management using CRDT
-- Local changes with automatic conflict resolution
-- Asynchronous updates propagation
-
-### 3. Data Storage Layer (Hybrid)
-- Frequently used objects via IPFS with local pinning
-- Critical/historical records duplicated in Arweave for eternal availability
-
-### 4. Identification Layer (Decentralized)
-- DID with verifiable credentials
-- Nostr keys
-- No single authorization system dependency
-
-### 5. Semantic Layer
-- Event and object formats definition
-- Structure described through open schemas
-- Context-dependent data interpretation
-
-### 6. Presentation Layer
-- Visualization and user interaction
-- API for different client types (3D engines, text interfaces)
-- Customizable appearance without changing underlying logic
-
 ## Node Architecture
 
-### Operating System Level
-Each node functions as a complete operating system and appears as a dedicated server to client applications while being part of a fully decentralized P2P network. Each node implements:
-- Full network stack for P2P communication
-- Data storage and retrieval mechanisms
-- Cryptographic verification systems
-- Resource management for decentralized operations
+Each node operates as an autonomous unit that does not depend on other nodes, does not require a centralized server, and does not need registration. The node stores a local copy of events representing changes in the world and exchanges these events with other nodes directly through the network. The foundation is a TCP connection through which nodes transmit event logs to each other. Each event is a string with a timestamp, author (public key), action type, and payload.
 
-### Client Interface Layer
-Nodes expose standard server interfaces:
-- Standard network protocols (HTTP, TCP, etc.)
-- File system access
-- Process management
-- Standard API endpoints
+### Node Components
 
-### P2P Integration
-Nodes participate in the decentralized network through:
-- Peer discovery mechanisms
-- Data replication based on demand
-- Trust chain validation
-- Consensus participation
+1. **Event Log Storage**: A local file for storing events.
+2. **TCP Server**: For incoming connections and event exchange.
+3. **Key Pair Generator**: For node identification.
+4. **Event Merger**: For combining event logs from different nodes, excluding duplicates.
+5. **Event Broadcaster**: For sending new events to all connected nodes.
+
+### Node Operation
+
+1. **Startup**: The node generates a key pair, creates a file for storing events, opens a port for incoming connections, and begins listening to the network.
+2. **Connection Handling**: When another node connects, the node sends all its known events to it and receives its log, then merges them, excluding duplicates, and saves the updated log locally.
+3. **Event Processing**: The node can receive new events from a local engine or user, write them to the log, and broadcast them to all connected nodes.
+4. **Offline Operation**: The node can operate offline, not connecting to anyone, and still remain a full participant in the system when a connection is available.
+
+### Event Structure
+
+Each event is a string with the following components:
+- **Timestamp**: When the event occurred.
+- **Author**: Public key of the node that created the event.
+- **Action Type**: Type of action (e.g., "move", "attack", "chat").
+- **Payload**: Data associated with the action.
+
+### Event Exchange Protocol
+
+1. **Connection Establishment**: Nodes establish a TCP connection.
+2. **Event Log Transmission**: Each node sends its event log to the other.
+3. **Event Log Merging**: Nodes merge the received logs, excluding duplicates.
+4. **Event Broadcasting**: Nodes broadcast new events to all connected nodes.
 
 ## Implementation Structure
 
 This repository contains multiple language implementations:
-- `/implementations/python` - Python implementation
 - `/implementations/javascript` - JavaScript implementation
-- `/implementations/java` - Java implementation
 
 Each implementation follows the same protocol specification defined in `/spec/protocol.md`.
-
-Detailed specifications for each layer:
-- Transport Layer: `/spec/transport-layer.md`
-- State Synchronization Layer: `/spec/state-sync-layer.md`
-- Data Storage Layer: `/spec/storage-layer.md`
-- Identification Layer: `/spec/identity-layer.md`
-- Semantic Layer: `/spec/semantic-layer.md`
-- Presentation Layer: `/spec/presentation-layer.md`
 
 ## Contributing
 
