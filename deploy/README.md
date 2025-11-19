@@ -1,75 +1,75 @@
-# Автоматический деплой P2P узла в Yandex Cloud
+# Automatic Deployment of P2P Node to Yandex Cloud
 
-Этот скрипт автоматизирует процесс деплоя P2P узла в Yandex Cloud через Container Registry и Compute Cloud.
+This script automates the process of deploying a P2P node to Yandex Cloud through Container Registry and Compute Cloud.
 
-## Требования
+## Requirements
 
-Перед запуском скрипта убедитесь, что у вас установлены:
+Before running the script, make sure you have the following installed:
 
 1. [Yandex Cloud CLI](https://cloud.yandex.ru/docs/cli/quickstart)
 2. Docker
-3. Доступ к вашему облаку Yandex Cloud с необходимыми правами
+3. Access to your Yandex Cloud with the necessary permissions
 
-## Подготовка
+## Preparation
 
-1. Авторизуйтесь в Yandex Cloud CLI:
+1. Authenticate with Yandex Cloud CLI:
    ```bash
    yc init
    ```
 
-2. Убедитесь, что вы находитесь в правильном каталоге (folder)
+2. Make sure you are in the correct folder
 
-## Использование
+## Usage
 
-1. Сделайте скрипт исполняемым:
+1. Make the script executable:
    ```bash
    chmod +x deploy/yandex-cloud-deploy.sh
    ```
 
-2. Запустите скрипт:
+2. Run the script:
    ```bash
    ./deploy/yandex-cloud-deploy.sh
    ```
 
-## Что делает скрипт
+## What the Script Does
 
-1. Проверяет наличие необходимых инструментов (yc, docker)
-2. Собирает Docker-образ приложения
-3. Настраивает Docker для работы с Yandex Container Registry
-4. Создает Container Registry (если еще не существует)
-5. Загружает образ в Container Registry
-6. Создает виртуальную машину с Container Optimized Image
-7. Настраивает виртуальную машину для запуска контейнера с приложением
+1. Checks for the presence of required tools (yc, docker)
+2. Builds the Docker image of the application
+3. Configures Docker to work with Yandex Container Registry
+4. Creates Container Registry (if it doesn't already exist)
+5. Uploads the image to Container Registry
+6. Creates a virtual machine with Container Optimized Image
+7. Configures the virtual machine to run the application container
 
-## Параметры скрипта
+## Script Parameters
 
-Скрипт использует следующие параметры по умолчанию:
-- Название реестра: `p2p-registry`
-- Название ВМ: `p2p-node`
-- Зона доступности: `ru-central1-a`
+The script uses the following default parameters:
+- Registry name: `p2p-registry`
+- VM name: `p2p-node`
+- Availability zone: `ru-central1-a`
 
-Эти параметры можно изменить в самом скрипте при необходимости.
+These parameters can be changed in the script itself if necessary.
 
-## После деплоя
+## After Deployment
 
-После успешного выполнения скрипта ваш P2P узел будет запущен в облаке. Вы можете проверить его статус с помощью:
+After the script completes successfully, your P2P node will be running in the cloud. You can check its status with:
 
 ```bash
 yc compute instance get --name p2p-node
 ```
 
-Для подключения к узлу по SSH используйте:
+To connect to the node via SSH, use:
 
 ```bash
 yc compute instance ssh p2p-node
 ```
 
-## Мониторинг
+## Monitoring
 
-Для мониторинга состояния узла можно использовать:
+To monitor the node status, you can use:
 
 ```bash
 yc compute instance get serial-port-output --name p2p-node
 ```
 
-Это покажет логи загрузки и работы узла.
+This will show the boot and operation logs of the node.
