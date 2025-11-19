@@ -32,11 +32,6 @@ Modules are loaded at runtime through the plugin system. To load a module:
 
 Game modules are protected and not included in the main repository fork. They may require separate licensing or authentication to access.
 
-## Available Modules
-
-- [Chess Game Module](https://github.com/p2p-decentralized-emulation/chess-game-module)
-- [Checkers Game Module](https://github.com/p2p-decentralized-emulation/checkers-game-module)
-
 ## Creating New Modules
 
 To create a new game module:
