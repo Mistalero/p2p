@@ -1,60 +1,60 @@
 #!/bin/bash
 
-# Скрипт автоматического деплоя P2P узла в Yandex Cloud
-# Требует установленного Yandex Cloud CLI и Docker
+# Script for automatic deployment of P2P node to Yandex Cloud
+# Requires Yandex Cloud CLI and Docker to be installed
 
-set -e  # Остановка при любой ошибке
+set -e  # Stop on any error
 
-echo "Начинаем деплой P2P узла в Yandex Cloud..."
+echo "Starting deployment of P2P node to Yandex Cloud..."
 
-# Проверка наличия необходимых инструментов
-echo "Проверяем наличие необходимых инструментов..."
+# Checking for required tools
+echo "Checking for required tools..."
 if ! command -v yc &> /dev/null; then
-    echo "Yandex Cloud CLI не найден. Пожалуйста, установите его с помощью:"
+    echo "Yandex Cloud CLI not found. Please install it with:"
     echo "curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash"
     exit 1
 fi
 
 if ! command -v docker &> /dev/null; then
-    echo "Docker не найден. Пожалуйста, установите Docker."
+    echo "Docker not found. Please install Docker."
     exit 1
 fi
 
-# Параметры (можно изменить)
+# Parameters (can be changed)
 REGISTRY_NAME="p2p-registry"
 VM_NAME="p2p-node"
 ZONE="ru-central1-a"
 FOLDER_ID=$(yc config get folder-id 2>/dev/null)
 
 if [ -z "$FOLDER_ID" ]; then
-    echo "Не удалось получить folder-id из конфигурации yc. Пожалуйста, выполните yc init"
+    echo "Failed to get folder-id from yc configuration. Please run yc init"
     exit 1
 fi
 
-echo "Используем folder-id: $FOLDER_ID"
+echo "Using folder-id: $FOLDER_ID"
 
-# Переход в директорию с приложением
+# Navigate to the application directory
 cd "$(dirname "$0")/../implementations/javascript" || exit 1
 
-echo "Собираем Docker-образ..."
+echo "Building Docker image..."
 docker build -t p2p-node .
 
-echo "Настраиваем Docker для работы с Yandex Container Registry..."
+echo "Configuring Docker to work with Yandex Container Registry..."
 yc container registry configure-docker
 
-echo "Создаем Container Registry (если еще не существует)..."
+echo "Creating Container Registry (if it doesn't already exist)..."
 if ! yc container registry get --name $REGISTRY_NAME &>/dev/null; then
     yc container registry create --name $REGISTRY_NAME --folder-id $FOLDER_ID
 fi
 
 REGISTRY_ID=$(yc container registry get --name $REGISTRY_NAME --format json | jq -r .id)
-echo "Используем registry ID: $REGISTRY_ID"
+echo "Using registry ID: $REGISTRY_ID"
 
-echo "Загружаем образ в Container Registry..."
+echo "Uploading image to Container Registry..."
 docker tag p2p-node cr.yandex/$REGISTRY_ID/p2p-node:latest
 docker push cr.yandex/$REGISTRY_ID/p2p-node:latest
 
-echo "Создаем виртуальную машину с Container Optimized Image..."
+echo "Creating virtual machine with Container Optimized Image..."
 yc compute instance create-container \
   --name $VM_NAME \
   --zone $ZONE \
@@ -64,10 +64,10 @@ yc compute instance create-container \
   --container-stdin \
   --folder-id $FOLDER_ID
 
-echo "Проверяем статус виртуальной машины..."
+echo "Checking virtual machine status..."
 yc compute instance get --name $VM_NAME --folder-id $FOLDER_ID
 
-echo "Деплой завершен успешно!"
-echo "Ваш P2P узел теперь запущен в Yandex Cloud."
-echo "Для подключения к узлу используйте команду:"
+echo "Deployment completed successfully!"
+echo "Your P2P node is now running in Yandex Cloud."
+echo "To connect to the node, use the command:"
 echo "yc compute instance get --name $VM_NAME --folder-id $FOLDER_ID"
