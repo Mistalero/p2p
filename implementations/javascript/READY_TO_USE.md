@@ -1,123 +1,123 @@
-# P2P Decentralized Emulation System - Готовая к использованию версия
+# P2P Decentralized Emulation System - Ready-to-use version
 
-## Статус: ✅ Готова к немедленному использованию "под ключ"
+## Status: ✅ Ready for immediate "out-of-the-box" use
 
-Эта система полностью готова к использованию без необходимости в дополнительной настройке или разработке. Все компоненты протестированы и готовы к работе.
+This system is completely ready for use without the need for additional setup or development. All components have been tested and are ready to work.
 
-## Что включено
+## What's included
 
-### 1. Полнофункциональная P2P система
-- ✅ Транспортный слой на базе libp2p
-- ✅ Слой синхронизации состояния с CRDT
-- ✅ Слой идентификации с DID и Nostr
-- ✅ Семантический адаптер для интероперабельности
+### 1. Full-featured P2P system
+- ✅ Transport layer based on libp2p
+- ✅ State synchronization layer with CRDT
+- ✅ Identity layer with DID and Nostr
+- ✅ Semantic adapter for interoperability
 
-### 2. Готовая точка входа
-- ✅ `app.js` - полнофункциональный узел P2P
-- ✅ Автоматическое обнаружение и подключение узлов
-- ✅ Автоматическая синхронизация состояния
-- ✅ Обработка graceful shutdown
+### 2. Ready entry point
+- ✅ `app.js` - full-featured P2P node
+- ✅ Automatic node discovery and connection
+- ✅ Automatic state synchronization
+- ✅ Graceful shutdown handling
 
-### 3. Инструменты развертывания
-- ✅ Dockerfile для контейнеризации
-- ✅ docker-compose.yml для оркестрации
-- ✅ Инструкции по развертыванию в облаке
-- ✅ Поддержка различных сред выполнения
+### 3. Deployment tools
+- ✅ Dockerfile for containerization
+- ✅ docker-compose.yml for orchestration
+- ✅ Cloud deployment instructions
+- ✅ Support for various runtime environments
 
-### 4. Документация
-- ✅ Подробные инструкции по запуску
-- ✅ Примеры использования API
-- ✅ Примеры конфигурации
-- ✅ Руководства по развертыванию
+### 4. Documentation
+- ✅ Detailed startup instructions
+- ✅ API usage examples
+- ✅ Configuration examples
+- ✅ Deployment guides
 
-## Быстрый старт (всего 2 команды!)
+## Quick Start (only 2 commands!)
 
 ```bash
-# 1. Установка зависимостей
+# 1. Install dependencies
 npm install
 
-# 2. Запуск системы
+# 2. Run the system
 npm start
 ```
 
-Всё! Система запущена и готова к работе.
+That's it! The system is running and ready to work.
 
-## Альтернативные способы запуска
+## Alternative ways to run
 
-### Docker (одна команда!)
+### Docker (one command!)
 ```bash
 docker-compose up -d
 ```
 
-### Развертывание в облаке
-Подробные инструкции для AWS, GCP, Azure и других платформ в файле `DEPLOYMENT.md`.
+### Cloud deployment
+Detailed instructions for AWS, GCP, Azure and other platforms in the `DEPLOYMENT.md` file.
 
-## Что делает система после запуска
+## What the system does after startup
 
-1. **Инициализация узла** - Создание уникального идентификатора DID
-2. **Запуск транспорта** - Инициализация libp2p с TCP/WebSocket
-3. **Обнаружение узлов** - Автоматическое обнаружение других узлов в сети
-4. **Создание CRDT** - Инициализация демонстрационных CRDT
-5. **Синхронизация** - Автоматическая синхронизация каждые 10 секунд
-6. **Интероперабельность** - Поддержка ActivityPub, Nostr и IPFS
+1. **Node initialization** - Creating a unique DID identifier
+2. **Transport startup** - Initializing libp2p with TCP/WebSocket
+3. **Node discovery** - Automatic discovery of other nodes on the network
+4. **CRDT creation** - Initializing demonstration CRDTs
+5. **Synchronization** - Automatic synchronization every 10 seconds
+6. **Interoperability** - Support for ActivityPub, Nostr and IPFS
 
-## Возможности системы
+## System capabilities
 
-### 🔄 Синхронизация состояния
-- CRDT для конфликтно-свободной синхронизации
-- LWWRegister для одиночных значений
-- ORSet для коллекций
-- Автоматическое разрешение конфликтов
+### 🔄 State synchronization
+- CRDT for conflict-free synchronization
+- LWWRegister for single values
+- ORSet for collections
+- Automatic conflict resolution
 
-### 🔗 Интероперабельность
-- ActivityPub для социальных приложений
-- Nostr для децентрализованных сообщений
-- IPFS/IPLD для постоянного хранения
+### 🔗 Interoperability
+- ActivityPub for social applications
+- Nostr for decentralized messaging
+- IPFS/IPLD for persistent storage
 
-### 🌐 Сетевые возможности
-- Peer discovery и подключение
-- PubSub для широковещательной передачи
-- DHT для маршрутизации контента
-- Шифрование соединений
+### 🌐 Network capabilities
+- Peer discovery and connection
+- PubSub for broadcast transmission
+- DHT for content routing
+- Connection encryption
 
-### 🛡️ Безопасность
-- Криптографическая идентификация
-- Проверка подлинности узлов
-- Защита от подделки сообщений
+### 🛡️ Security
+- Cryptographic identification
+- Node authenticity verification
+- Message forgery protection
 
-## Расширение функциональности
+## Extending functionality
 
-Система легко расширяется:
+The system is easily extensible:
 
-1. **Новые типы CRDT** - Добавление в `src/state-sync/`
-2. **Новые обработчики** - Расширение `TransportLayer`
-3. **Новые протоколы** - Расширение `SemanticAdapter`
-4. **Новые модули** - Создание новых компонентов
+1. **New CRDT types** - Adding to `src/state-sync/`
+2. **New handlers** - Extending `TransportLayer`
+3. **New protocols** - Extending `SemanticAdapter`
+4. **New modules** - Creating new components
 
-## Требования к системе
+## System requirements
 
-- Node.js v16 или выше
-- npm v7 или выше
-- Доступ к интернету (для обнаружения узлов)
-- Открытые порты 4001 (TCP) и 8080 (TCP)
+- Node.js v16 or higher
+- npm v7 or higher
+- Internet access (for node discovery)
+- Open ports 4001 (TCP) and 8080 (TCP)
 
-## Лицензия
+## License
 
-Система распространяется под лицензией CC0 (общественное достояние).
-
----
-
-## Гарантии качества
-
-✅ Все зависимости протестированы
-✅ Система прошла тестирование на совместимость
-✅ Документация полностью актуальна
-✅ Примеры проверены на работоспособность
-✅ Поддерживается актуальная версия всех компонентов
-
-## Поддержка
-
-Система поддерживается сообществом и готова к использованию в продакшн среде.
+The system is distributed under the CC0 license (public domain).
 
 ---
-*P2P Decentralized Emulation System - Децентрализация без компромиссов*
+
+## Quality guarantees
+
+✅ All dependencies tested
+✅ System passed compatibility testing
+✅ Documentation is completely up-to-date
+✅ Examples verified for functionality
+✅ Current version of all components maintained
+
+## Support
+
+The system is community-supported and ready for use in production environments.
+
+---
+*P2P Decentralized Emulation System - Decentralization without compromises*

@@ -1,18 +1,18 @@
-# Развертывание P2P Decentralized Emulation System
+# Deployment of P2P Decentralized Emulation System
 
-## Облачные платформы
+## Cloud Platforms
 
 ### AWS
 
-1. Создайте EC2 инстанс (t3.micro или выше)
-2. Откройте порты 4001 (TCP) и 8080 (TCP) в Security Group
-3. Подключитесь к инстансу через SSH
-4. Установите Node.js и зависимости:
+1. Create an EC2 instance (t3.micro or higher)
+2. Open ports 4001 (TCP) and 8080 (TCP) in Security Group
+3. Connect to the instance via SSH
+4. Install Node.js and dependencies:
    ```bash
    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
    sudo apt-get install -y nodejs
    ```
-5. Клонируйте репозиторий и запустите систему:
+5. Clone the repository and run the system:
    ```bash
    git clone <repository-url>
    cd p2p-decentralized-emulation/implementations/javascript
@@ -22,15 +22,15 @@
 
 ### Google Cloud Platform
 
-1. Создайте Compute Engine инстанс (e2-micro или выше)
-2. Откройте порты 4001 и 8080 в брандмауэре
-3. Подключитесь к инстансу через SSH
-4. Установите Node.js и зависимости:
+1. Create a Compute Engine instance (e2-micro or higher)
+2. Open ports 4001 and 8080 in the firewall
+3. Connect to the instance via SSH
+4. Install Node.js and dependencies:
    ```bash
    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
    sudo apt-get install -y nodejs
    ```
-5. Клонируйте репозиторий и запустите систему:
+5. Clone the repository and run the system:
    ```bash
    git clone <repository-url>
    cd p2p-decentralized-emulation/implementations/javascript
@@ -40,15 +40,15 @@
 
 ### Microsoft Azure
 
-1. Создайте виртуальную машину (B1S или выше)
-2. Откройте порты 4001 и 8080 в группе безопасности сети
-3. Подключитесь к виртуальной машине через SSH
-4. Установите Node.js и зависимости:
+1. Create a virtual machine (B1S or higher)
+2. Open ports 4001 and 8080 in the network security group
+3. Connect to the virtual machine via SSH
+4. Install Node.js and dependencies:
    ```bash
    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
    sudo apt-get install -y nodejs
    ```
-5. Клонируйте репозиторий и запустите систему:
+5. Clone the repository and run the system:
    ```bash
    git clone <repository-url>
    cd p2p-decentralized-emulation/implementations/javascript
@@ -58,25 +58,25 @@
 
 ### Heroku
 
-1. Установите Heroku CLI
-2. Создайте новое приложение:
+1. Install Heroku CLI
+2. Create a new application:
    ```bash
    heroku create
    ```
-3. Добавьте buildpack для Node.js:
+3. Add Node.js buildpack:
    ```bash
    heroku buildpacks:set heroku/nodejs
    ```
-4. Разверните приложение:
+4. Deploy the application:
    ```bash
    git push heroku main
    ```
 
-## Контейнеризация
+## Containerization
 
 ### Docker
 
-Для запуска в Docker:
+To run in Docker:
 
 ```bash
 cd implementations/javascript
@@ -86,7 +86,7 @@ docker run -p 4001:4001 -p 8080:8080 p2p-node
 
 ### Docker Compose
 
-Для запуска с помощью Docker Compose:
+To run with Docker Compose:
 
 ```bash
 cd implementations/javascript
@@ -95,9 +95,9 @@ docker-compose up -d
 
 ### Kubernetes
 
-Для развертывания в Kubernetes:
+To deploy in Kubernetes:
 
-1. Создайте deployment:
+1. Create a deployment:
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -121,66 +121,66 @@ docker-compose up -d
            - containerPort: 8080
    ```
 
-2. Примените конфигурацию:
+2. Apply the configuration:
    ```bash
    kubectl apply -f deployment.yaml
    ```
 
-## Мониторинг и логирование
+## Monitoring and Logging
 
-### Логирование
+### Logging
 
-Система автоматически записывает логи в stdout/stderr. Для сохранения логов используйте:
+The system automatically writes logs to stdout/stderr. To save logs, use:
 
 ```bash
 npm start > app.log 2>&1 &
 ```
 
-### Мониторинг
+### Monitoring
 
-Для мониторинга состояния узла используйте:
+To monitor node status, use:
 
 ```bash
-# Проверка состояния процесса
+# Check process status
 ps aux | grep node
 
-# Проверка открытых портов
+# Check open ports
 netstat -tulpn | grep :4001
 netstat -tulpn | grep :8080
 ```
 
-## Резервное копирование
+## Backup
 
-Данные узла хранятся в директории `data`. Для резервного копирования:
+Node data is stored in the `data` directory. For backup:
 
 ```bash
-# Создание резервной копии
+# Create backup
 tar -czf p2p-node-backup-$(date +%Y%m%d).tar.gz data
 
-# Восстановление из резервной копии
+# Restore from backup
 tar -xzf p2p-node-backup-*.tar.gz
 ```
 
-## Обновление системы
+## System Update
 
-Для обновления системы:
+To update the system:
 
-1. Остановите текущий узел:
+1. Stop the current node:
    ```bash
    npm stop
    ```
 
-2. Получите последние изменения:
+2. Get the latest changes:
    ```bash
    git pull
    ```
 
-3. Обновите зависимости:
+3. Update dependencies:
    ```bash
    npm install
    ```
 
-4. Запустите обновленный узел:
+4. Start the updated node:
    ```bash
    npm start
    ```

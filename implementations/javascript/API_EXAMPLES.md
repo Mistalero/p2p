@@ -1,55 +1,55 @@
-# Примеры использования API P2P Decentralized Emulation System
+# API Usage Examples for P2P Decentralized Emulation System
 
-## Основные концепции
+## Core Concepts
 
-Система предоставляет несколько способов взаимодействия:
+The system provides several ways to interact:
 
-1. **Программный API** - для интеграции в другие приложения
-2. **PubSub сообщения** - для обмена данными между узлами
-3. **Семантическая адаптация** - для совместимости с другими протоколами
+1. **Programmatic API** - for integration into other applications
+2. **PubSub messages** - for data exchange between nodes
+3. **Semantic adaptation** - for compatibility with other protocols
 
-## Примеры программного API
+## Programmatic API Examples
 
-### Создание и управление CRDT
+### Creating and Managing CRDTs
 
 ```javascript
 import { StateSyncLayer } from './src/index.js';
 
-// Создание слоя синхронизации состояния
+// Creating a state synchronization layer
 const stateSyncLayer = new StateSyncLayer();
 
-// Создание LWWRegister для хранения позиции игрока
+// Creating an LWWRegister to store player position
 const positionRegister = stateSyncLayer.createCRDT('player-position', 'LWWRegister', { x: 0, y: 0, z: 0 });
 
-// Создание ORSet для инвентаря игрока
+// Creating an ORSet for player inventory
 const inventorySet = stateSyncLayer.createCRDT('player-inventory', 'ORSet', ['sword', 'shield']);
 
-// Обновление позиции
+// Updating position
 positionRegister.set({ x: 10, y: 20, z: 0 }, stateSyncLayer.getNodeId());
 
-// Добавление предмета в инвентарь
+// Adding an item to inventory
 inventorySet.add('potion', stateSyncLayer.getNodeId());
 
-// Получение текущих значений
+// Getting current values
 console.log('Position:', positionRegister.value());
 console.log('Inventory:', inventorySet.value());
 ```
 
-### Работа с транспортным слоем
+### Working with Transport Layer
 
 ```javascript
 import TransportLayer from './src/TransportLayer.js';
 
-// Создание транспортного слоя
+// Creating a transport layer
 const transportLayer = new TransportLayer(stateSyncLayer);
 
-// Инициализация
+// Initialization
 await transportLayer.initialize();
 
-// Подписка на топик
+// Subscribing to a topic
 await transportLayer.subscribeToTopic('game-state');
 
-// Публикация сообщения
+// Publishing a message
 await transportLayer.publishMessage('game-state', {
   type: 'player_move',
   playerId: stateSyncLayer.getNodeId(),
@@ -57,38 +57,38 @@ await transportLayer.publishMessage('game-state', {
   timestamp: Date.now()
 });
 
-// Отправка прямого сообщения другому узлу
-// (предполагается, что peerId известен)
+// Sending a direct message to another node
+// (assuming peerId is known)
 // await transportLayer.sendDirectMessage(peerId, message);
 ```
 
-### Семантическая адаптация
+### Semantic Adaptation
 
 ```javascript
 import { SemanticAdapter } from './src/index.js';
 
-// Создание семантического адаптера
+// Creating a semantic adapter
 const semanticAdapter = new SemanticAdapter(stateSyncLayer);
 
-// Конвертация в формат ActivityPub
+// Converting to ActivityPub format
 const positionActivityPub = semanticAdapter.crdtToActivityPub(positionRegister);
 console.log('ActivityPub format:', JSON.stringify(positionActivityPub, null, 2));
 
-// Конвертация в событие Nostr
+// Converting to a Nostr event
 const positionNostrEvent = semanticAdapter.crdtToNostrEvent(positionRegister, 'wss://relay.example.com');
 console.log('Nostr event:', JSON.stringify(positionNostrEvent, null, 2));
 
-// Сериализация для IPFS/IPLD
+// Serializing for IPFS/IPLD
 const positionIPLD = semanticAdapter.serializeForIPFS(positionRegister);
 console.log('IPLD format:', JSON.stringify(positionIPLD, null, 2));
 ```
 
-## Примеры PubSub сообщений
+## PubSub Message Examples
 
-### Синхронизация состояния
+### State Synchronization
 
 ```javascript
-// Отправка состояния другим узлам
+// Sending state to other nodes
 const stateMessage = {
   type: 'state_sync',
   sender: stateSyncLayer.getNodeId(),
@@ -98,18 +98,18 @@ const stateMessage = {
 
 await transportLayer.publishMessage('p2p-state-sync', stateMessage);
 
-// Обработка входящих сообщений о состоянии
+// Handling incoming state messages
 transportLayer.handleStateSyncMessage = (message) => {
-  // Десериализация и слияние состояния
+  // Deserializing and merging state
   stateSyncLayer.deserializeState(message.state);
   console.log('State synchronized from', message.sender);
 };
 ```
 
-### Идентификация узлов
+### Node Identification
 
 ```javascript
-// Отправка вызова для проверки идентичности
+// Sending a challenge for identity verification
 const challenge = Math.random().toString(36).substring(2, 15);
 const challengeMessage = {
   type: 'identity_challenge',
@@ -120,24 +120,24 @@ const challengeMessage = {
 
 await transportLayer.publishMessage('p2p-identity', challengeMessage);
 
-// Обработка ответа на вызов
+// Handling challenge response
 transportLayer.handleIdentityResponse = (message) => {
-  // Проверка подписи (в реальной реализации)
+  // Verifying signature (in real implementation)
   // verifySignature(message.signature, message.challenge, message.sender);
   console.log('Identity verified for node', message.sender);
 };
 ```
 
-## Примеры интеграции с внешними протоколами
+## Examples of Integration with External Protocols
 
-### Интеграция с ActivityPub
+### Integration with ActivityPub
 
 ```javascript
-// Создание ActivityPub объекта из CRDT
+// Creating an ActivityPub object from CRDT
 const activityPubObject = semanticAdapter.crdtToActivityPub(positionRegister);
 
-// Публикация в ActivityPub совместимую систему
-// (предполагается наличие HTTP клиента)
+// Publishing to an ActivityPub compatible system
+// (assuming an HTTP client is available)
 fetch('https://activitypub.example.com/inbox', {
   method: 'POST',
   headers: {
@@ -147,38 +147,38 @@ fetch('https://activitypub.example.com/inbox', {
 });
 ```
 
-### Интеграция с Nostr
+### Integration with Nostr
 
 ```javascript
-// Создание Nostr события из CRDT
+// Creating a Nostr event from CRDT
 const nostrEvent = semanticAdapter.crdtToNostrEvent(positionRegister, 'wss://relay.example.com');
 
-// Публикация в Nostr релей
-// (предполагается наличие Nostr клиента)
+// Publishing to a Nostr relay
+// (assuming a Nostr client is available)
 const relay = new WebSocket('wss://relay.example.com');
 relay.onopen = () => {
   relay.send(JSON.stringify(['EVENT', nostrEvent]));
 };
 ```
 
-### Интеграция с IPFS
+### Integration with IPFS
 
 ```javascript
-// Сериализация CRDT для IPFS
+// Serializing CRDT for IPFS
 const ipldObject = semanticAdapter.serializeForIPFS(positionRegister);
 
-// Сохранение в IPFS
-// (предполагается наличие IPFS клиента)
+// Saving to IPFS
+// (assuming an IPFS client is available)
 const cid = await ipfs.add(JSON.stringify(ipldObject));
 console.log('CID:', cid.toString());
 ```
 
-## Примеры расширения функциональности
+## Examples of Functionality Extension
 
-### Добавление нового типа CRDT
+### Adding a New CRDT Type
 
 ```javascript
-// Создание нового типа CRDT (например, счетчик)
+// Creating a new CRDT type (e.g., counter)
 import CRDT from './src/state-sync/CRDT.js';
 
 class Counter extends CRDT {
@@ -227,37 +227,37 @@ class Counter extends CRDT {
   }
 }
 
-// Регистрация нового типа в StateSyncLayer
-// (в реальной реализации потребуется модификация StateSyncLayer)
+// Registering the new type in StateSyncLayer
+// (in real implementation, StateSyncLayer modification would be required)
 ```
 
-### Добавление нового обработчика сообщений
+### Adding a New Message Handler
 
 ```javascript
-// Расширение TransportLayer новым обработчиком
+// Extending TransportLayer with a new handler
 class ExtendedTransportLayer extends TransportLayer {
   constructor(stateSyncLayer) {
     super(stateSyncLayer);
     this.customHandlers = new Map();
   }
 
-  // Добавление пользовательского обработчика
+  // Adding a custom handler
   addCustomHandler(messageType, handler) {
     this.customHandlers.set(messageType, handler);
   }
 
-  // Расширение обработчика PubSub сообщений
+  // Extending the PubSub message handler
   handlePubsubMessage(evt) {
     try {
       const message = JSON.parse(new TextDecoder().decode(evt.detail.data));
       
-      // Проверка пользовательских обработчиков
+      // Checking custom handlers
       if (this.customHandlers.has(message.type)) {
         this.customHandlers.get(message.type)(message);
         return;
       }
       
-      // Обработка стандартных сообщений
+      // Handling standard messages
       super.handlePubsubMessage(evt);
     } catch (error) {
       console.error('Error handling pubsub message:', error);
@@ -265,29 +265,29 @@ class ExtendedTransportLayer extends TransportLayer {
   }
 }
 
-// Использование расширенного транспортного слоя
+// Using the extended transport layer
 const extendedTransportLayer = new ExtendedTransportLayer(stateSyncLayer);
 
-// Добавление пользовательского обработчика
+// Adding a custom handler
 extendedTransportLayer.addCustomHandler('custom_message', (message) => {
   console.log('Received custom message:', message);
-  // Обработка пользовательского сообщения
+  // Handling custom message
 });
 ```
 
-## Примеры использования в реальных сценариях
+## Examples of Usage in Real Scenarios
 
-### Создание децентрализованной игры
+### Creating a Decentralized Game
 
 ```javascript
-// Инициализация игрового узла
+// Initializing a game node
 const gameState = {
   players: stateSyncLayer.createCRDT('players', 'ORSet', []),
   playerPositions: new Map(),
   gameObjects: stateSyncLayer.createCRDT('objects', 'ORSet', [])
 };
 
-// Добавление игрока
+// Adding a player
 function addPlayer(playerId) {
   gameState.players.add(playerId, stateSyncLayer.getNodeId());
   gameState.playerPositions.set(playerId, 
@@ -295,7 +295,7 @@ function addPlayer(playerId) {
   );
 }
 
-// Обновление позиции игрока
+// Updating player position
 function updatePlayerPosition(playerId, position) {
   const positionRegister = gameState.playerPositions.get(playerId);
   if (positionRegister) {
@@ -303,7 +303,7 @@ function updatePlayerPosition(playerId, position) {
   }
 }
 
-// Синхронизация игрового состояния
+// Synchronizing game state
 setInterval(() => {
   const gameStateMessage = {
     type: 'game_state',
@@ -323,4 +323,4 @@ setInterval(() => {
 }, 1000);
 ```
 
-Эти примеры демонстрируют основные способы использования P2P Decentralized Emulation System. Система предоставляет гибкий и расширяемый API для создания децентрализованных приложений с возможностью синхронизации состояния, идентификации узлов и интероперабельности с другими протоколами.
+These examples demonstrate the main ways to use the P2P Decentralized Emulation System. The system provides a flexible and extensible API for creating decentralized applications with state synchronization, node identification, and interoperability with other protocols.
