@@ -41,6 +41,18 @@ This repository contains multiple language implementations:
 
 Each implementation follows the same protocol specification defined in `/spec/protocol.md`.
 
+## Documentation Structure
+
+The documentation for this project is organized into several categories to help you find what you need:
+
+- **[API Documentation](api/)** - Complete API reference and usage guides
+- **[Deployment Guides](deployment/)** - Instructions for deploying in various environments
+- **[Usage Examples](usage/)** - Examples and scenarios for using the P2P node
+- **[Contributing Guidelines](contributing/)** - Guidelines for contributing to the project
+- **[Security Documentation](security/)** - Security considerations and best practices
+
+Each category contains specific guides and reference materials to help you work with the P2P node effectively.
+
 ## Contributing
 
 To add a new language implementation:
