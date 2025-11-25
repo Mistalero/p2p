@@ -1,0 +1,121 @@
+# Python P2P Layer Implementation
+
+This is the Python implementation of the P2P layer. It provides functionality for decentralized state management and synchronization across a P2P network.
+
+## Features
+
+### Core Functionality
+- Event log storage and management
+- TCP server for incoming connections
+- Key pair generation for node identification
+- Event log merging and deduplication
+- Event broadcasting to connected nodes
+- Offline operation support
+
+### Event Structure
+Each event is a string with the following components:
+- **Timestamp**: When the event occurred.
+- **Author**: Public key of the node that created the event.
+- **Action Type**: Type of action (e.g., "move", "attack", "chat").
+- **Payload**: Data associated with the action.
+
+### Event Exchange Protocol
+1. **Connection Establishment**: Nodes establish a TCP connection.
+2. **Event Log Transmission**: Each node sends its event log to the other.
+3. **Event Log Merging**: Nodes merge the received logs, excluding duplicates.
+4. **Event Broadcasting**: Nodes broadcast new events to all connected nodes.
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Quick Start
+
+To run the fully functional P2P node:
+
+```bash
+python app.py
+```
+
+This will start a complete P2P node with:
+- Event log storage and management
+- TCP server for incoming connections
+- Key pair generation for node identification
+- Event log merging and deduplication
+- Event broadcasting to connected nodes
+- Offline operation support
+
+## Usage
+
+### Basic Setup
+
+```python
+from src.p2p_node import P2PNode
+
+# Create a P2P node
+node = P2PNode()
+
+# Initialize the node
+node.initialize()
+
+# Start listening for connections
+node.start_listening()
+```
+
+### Working with Events
+
+```python
+import time
+
+# Create an event
+event = {
+    'timestamp': int(time.time() * 1000),
+    'author': node.get_public_key(),
+    'action_type': 'move',
+    'payload': {'x': 10, 'y': 20, 'z': 0}
+}
+
+# Add the event to the local log
+node.add_event(event)
+
+# Broadcast the event to all connected nodes
+node.broadcast_event(event)
+```
+
+### Event Handling
+
+```python
+# Handle incoming events
+def handle_event(event):
+    print('Received event:', event)
+
+node.on('event', handle_event)
+
+# Handle new connections
+def handle_connection(peer):
+    print('New connection from:', peer)
+
+node.on('connection', handle_connection)
+```
+
+## Example
+
+See `src/example.py` for a complete example of how to use the P2P layer.
+
+For a ready-to-run node implementation, see `app.py` and run with `python app.py`.
+
+## Running Tests
+
+```bash
+python -m pytest tests/
+```
+
+## Dependencies
+
+- None (minimal implementation)
+
+## License
+
+This project is licensed under CC0 - see the LICENSE file for details.
