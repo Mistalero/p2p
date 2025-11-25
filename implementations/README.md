@@ -12,6 +12,10 @@ Status: Complete
 Location: [python/](python/)
 Status: Complete
 
+### LUA
+Location: [lua/](lua/)
+Status: Complete
+
 ## Implementation Status
 
 All implementations follow the same core protocol and provide equivalent functionality:
