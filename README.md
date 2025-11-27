@@ -45,6 +45,21 @@ This will start a fully functional P2P node with:
 - Event broadcasting to connected nodes
 - Offline operation support
 
+## Self-Refactoring System
+
+The self-refactoring system is a core component that implements a closed loop of analysis, transformation, and replacement of its own code without external intervention. It consists of three mandatory subsystems:
+
+### Introspection Module
+Located in `implementations/self-refactoring-system/introspection`, this module reads the current structure of the kernel's executable image, including symbol tables, call graphs, and component dependencies.
+
+### Code Generation Module
+Located in `implementations/self-refactoring-system/code-generation`, this module applies a set of formal transformation rules defined in the kernel specification to the obtained structure and creates a new valid image or its fragments.
+
+### Safe Update Module
+Located in `implementations/self-refactoring-system/safe-update`, this module verifies the correctness of the new code through static analysis and behavior modeling, then atomically replaces target memory segments while maintaining system operability.
+
+All operations are performed within the kernel process address space without using external tools, emulation, or privileged means not part of the system itself. A rollback mechanism is supported: before applying changes, a backup copy of the affected blocks is saved, and in case of invariant violations, execution is automatically restored from the backup state.
+
 ## Docker Deployment
 
 You can also run the P2P node using Docker:
