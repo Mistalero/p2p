@@ -47,6 +47,24 @@ This will start a complete P2P node with:
 - Event broadcasting to connected nodes
 - Offline operation support
 
+### Running the Simple P2P Node Implementation
+
+The repository also includes a simpler P2P node implementation that follows the requirements from issue #17:
+
+```bash
+node p2p-node.js [port]
+```
+
+This implementation features:
+- Autonomous node that doesn't depend on centralized servers
+- Stores local copy of events in text files
+- Exchanges events with other nodes through TCP connections
+- Generates key pair on startup
+- Listens for incoming connections
+- Synchronizes events with connected nodes
+- Works in offline mode
+- Uses only simple text files and network sockets
+
 ## Usage
 
 ### Basic Setup
@@ -101,6 +119,8 @@ node.on('connection', (peer) => {
 See `src/example.js` for a complete example of how to use the P2P layer.
 
 For a ready-to-run node implementation, see `app.js` and run with `npm start`.
+
+For the simple P2P node implementation, see `p2p-node.js`.
 
 ## Running Tests
 
