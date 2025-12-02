@@ -1,75 +1,75 @@
-# Философия и принципы проектирования
+# Design Philosophy and Principles
 
-## Общее видение
+## Overall Vision
 
-Система представляет собой децентрализованное цифровое пространство, в котором все данные — контент, состояние мира, правила взаимодействия — хранятся и реплицируются участниками сети без зависимости от центрального оператора, корпоративной инфраструктуры или коммерческой монетизации. Жизненный цикл любого фрагмента информации определяется исключительно интересом к нему со стороны сообщества: пока хотя бы один участник хранит и распространяет данные, они остаются доступными.
+The system represents a decentralized digital space where all data - content, world state, interaction rules - is stored and replicated by network participants without dependence on a central operator, corporate infrastructure, or commercial monetization. The lifecycle of any information fragment is determined exclusively by interest in it from the community: as long as at least one participant stores and distributes the data, it remains available.
 
-## Архитектурные принципы
+## Architectural Principles
 
-### Отсутствие центрального контроля
+### No Central Control
 
-Архитектура основана на peer-to-peer протоколе с криптографической целостностью данных. Каждый узел сети может выступать одновременно как клиент и как хост, обеспечивая репликацию, верификацию и маршрутизацию без иерархии. Отсутствует выделенный «главный сервер» или «административный центр» — все узлы равноправны, и ни один из них не несёт юридической или технической ответственности за содержимое, хранящееся в сети.
+The architecture is based on a peer-to-peer protocol with cryptographic data integrity. Each network node can simultaneously act as both client and host, providing replication, verification, and routing without hierarchy. There is no dedicated "main server" or "administrative center" - all nodes are equal, and none of them bears legal or technical responsibility for the content stored in the network.
 
-### Неизменяемость и прослеживаемость
+### Immutability and Traceability
 
-Данные организованы в неизменяемые (immutable) объекты с криптографическими хешами, образующие направленный ациклический граф зависимостей. Каждое изменение — будь то новый пост, модификация игрового мира или обновление правила — фиксируется как новый объект, ссылающийся на предыдущее состояние. Это обеспечивает полную прослеживаемость истории без необходимости доверять отдельному участнику.
+Data is organized into immutable objects with cryptographic hashes, forming a directed acyclic graph of dependencies. Every change - whether a new post, modification of the game world, or update of a rule - is recorded as a new object referencing the previous state. This ensures complete traceability of history without the need to trust a single participant.
 
-### Автономия участников
+### Participant Autonomy
 
-Репликация управляется локальными политиками каждого узла: пользователь сам решает, какие данные хранить, насколько долго и в каком объёме. При этом система поддерживает стимулы (не обязательно экономические) для участия в репликации: например, доступ к контенту может требовать внесения вклада в хранение других данных.
+Replication is governed by local policies of each node: the user decides which data to store, for how long, and in what volume. Meanwhile, the system supports incentives (not necessarily economic) for participating in replication: for example, access to content may require contribution to storing other data.
 
-### Устойчивость к секционированию
+### Resilience to Partitioning
 
-Сетевая топология динамична и устойчива к секционированию. При разделении сети на изолированные сегменты каждый из них продолжает функционировать автономно, сохраняя локальную целостность. После восстановления связи сегменты автоматически синхронизируют совместимые состояния, а конфликты разрешаются по предопределённым, но конфигурируемым правилам.
+The network topology is dynamic and resilient to partitioning. When the network is divided into isolated segments, each continues to function autonomously, maintaining local integrity. After connection is restored, segments automatically synchronize compatible states, and conflicts are resolved according to predefined but configurable rules.
 
-### Открытый интерфейс
+### Open Interface
 
-Интерфейс взаимодействия с сетью стандартизирован: любой клиент, реализующий протокол, может подключиться к любой ноде и получить доступ ко всему публичному контенту. Ноды не фильтруют и не модифицируют запросы — они лишь маршрутизируют и кэшируют. Это гарантирует, что функциональность и доступность не зависят от выбора точки входа.
+The interface for interacting with the network is standardized: any client implementing the protocol can connect to any node and access all public content. Nodes do not filter or modify requests - they only route and cache. This guarantees that functionality and availability do not depend on the choice of entry point.
 
-## Принципы долговечности
+## Principles of Durability
 
-### Избыточность и автономия
+### Redundancy and Autonomy
 
-Долговечность обеспечивается не резервированием, а избыточностью и автономией. Контент не «сохраняется на случай сбоя» — он живёт, пока жив интерес к нему. Это смещает фокус с технической надёжности на социальную устойчивость: система проектируется так, чтобы участие в хранении было технически простым, энергоэффективным и не требующим специализированного оборудования.
+Durability is ensured not by backup, but by redundancy and autonomy. Content is not "saved in case of failure" - it lives as long as there is interest in it. This shifts focus from technical reliability to social sustainability: the system is designed so that participation in storage is technically simple, energy-efficient, and does not require specialized equipment.
 
-### Культурная устойчивость
+### Cultural Resilience
 
-Культурная устойчивость достигается через аналогии с устной традицией, рукописными хрониками и семейными архивами. Эти модели используются не как метафоры, а как операционные принципы: фрагментация, множественность копий, адаптация при передаче, локальная интерпретация. Система не стремится к «единой правде», но обеспечивает механизмы для согласования интерпретаций, когда это необходимо.
+Cultural resilience is achieved through analogies with oral tradition, manuscript chronicles, and family archives. These models are used not as metaphors, but as operational principles: fragmentation, multiplicity of copies, adaptation during transmission, local interpretation. The system does not strive for a "single truth," but provides mechanisms for reconciling interpretations when necessary.
 
-## Принципы безопасности и приватности
+## Security and Privacy Principles
 
-### Открытость по умолчанию
+### Open by Default
 
-Все данные являются открытыми по умолчанию, но доступ к ним может быть ограничен криптографически (например, через shared secret или capability-based ACL). Однако шифрование не заменяет архитектурную децентрализацию: даже приватные данные, если они реплицируются, подчиняются тем же принципам устойчивости — они исчезнут только тогда, когда все обладатели ключей перестанут их хранить.
+All data is open by default, but access to it can be restricted cryptographically (for example, through shared secret or capability-based ACL). However, encryption does not replace architectural decentralization: even private data, if replicated, follows the same principles of resilience - it disappears only when all key holders stop storing it.
 
-### Отделение монетизации
+### Separation of Monetization
 
-Модель монетизации, если она применяется, отделена от доступа к данным и не влияет на их долговечность. Нельзя «отключить» пользователя за неоплату — можно лишь ограничить доступ к приватным или коммерческим слоям, оставляя публичное пространство нетронутым. Это гарантирует, что экономические колебания не уничтожают культурный или функциональный слой системы.
+The monetization model, if applied, is separated from data access and does not affect its durability. You cannot "disconnect" a user for non-payment - you can only limit access to private or commercial layers, leaving the public space untouched. This ensures that economic fluctuations do not destroy the cultural or functional layer of the system.
 
-## Принципы управления и автономии
+## Governance and Autonomy Principles
 
-### Отсутствие скрытых механизмов управления
+### No Hidden Control Mechanisms
 
-Система не содержит скрытых механизмов управления, «админок» или backdoor’ов. Любое изменение протокола требует консенсуса через совместимость: новые версии должны уметь взаимодействовать со старыми, либо образовывать отдельную ветвь. Это защищает от захвата проекта и сохраняет автономию участников даже в случае развилки (fork).
+The system contains no hidden control mechanisms, "admin panels," or backdoors. Any protocol change requires consensus through compatibility: new versions must be able to interact with old ones, or form a separate branch. This protects against project capture and preserves participant autonomy even in case of a fork.
 
-### Уважение к автономии участника
+### Respect for Participant Autonomy
 
-Отказ от централизованной идентификации означает, что участники взаимодействуют через криптографические ключи, а не аккаунты. Однако система поддерживает механизмы репутации и верификации, построенные на социальных связях (web of trust), а не на KYC. Это совмещает анонимность с возможностью доверия, не жертвуя децентрализацией.
+Rejection of centralized identification means that participants interact through cryptographic keys, not accounts. However, the system supports reputation and verification mechanisms built on social connections (web of trust), not KYC. This combines anonymity with the possibility of trust, without sacrificing decentralization.
 
-### Отказ от принуждения
+### Rejection of Coercion
 
-Система не пытается подменить государство или обеспечить правоприменение. Отсутствие аналога «полиции» — сознательный выбор, вытекающий из приоритета свободы и равенства. Конфликты разрешаются через техническое разделение (например, форки) или социальные механизмы, а не через принуждение. Это делает систему уязвимой к злоупотреблениям, но устойчивой к тирании.
+The system does not attempt to replace the state or ensure law enforcement. The absence of an equivalent to "police" is a conscious choice, stemming from the priority of freedom and equality. Conflicts are resolved through technical separation (for example, forks) or social mechanisms, not through coercion. This makes the system vulnerable to abuse, but resilient to tyranny.
 
-## Принципы пользовательского опыта
+## User Experience Principles
 
-### Прозрачность сложности
+### Transparency of Complexity
 
-Пользовательский опыт проектируется так, чтобы скрывать сложность сети, но не искажать её принципы. Например, вместо «загрузки» контента узел может отображать его по мере получения от соседей, с индикацией степени репликации. Это формирует осознанное отношение: пользователь понимает, что видит не «гарантированное содержимое», а фрагмент коллективной памяти, который он сам может укрепить.
+User experience is designed to hide network complexity, but not distort its principles. For example, instead of "downloading" content, a node may display it as it receives it from neighbors, with an indication of the degree of replication. This forms a conscious relationship: the user understands that they see not "guaranteed content," but a fragment of collective memory that they themselves can strengthen.
 
-### Уважение к автономии
+### Respect for Autonomy
 
-Фундаментальный принцип — уважение к автономии участника. Никакие данные не покидают устройство без явного, контролируемого согласия. Никакие решения не принимаются от имени пользователя. Система не учит историю, не строит профили, не оптимизирует под «наилучший опыт». Она предоставляет инструмент, а не сценарий.
+The fundamental principle is respect for participant autonomy. No data leaves the device without explicit, controlled consent. No decisions are made on behalf of the user. The system does not keep history, does not build profiles, does not optimize for "best experience." It provides a tool, not a script.
 
-## Заключение
+## Conclusion
 
-Именно в этом — её долговечность: не как технологии, а как пространства, где коллективная воля заменяет корпоративную волю. Система спроектирована как децентрализованное цифровое пространство, в котором все данные хранятся и реплицируются участниками сети без зависимости от центрального оператора, корпоративной инфраструктуры или коммерческой монетизации.
+It is precisely in this - its durability: not as technology, but as a space where collective will replaces corporate will. The system is designed as a decentralized digital space where all data is stored and replicated by network participants without dependence on a central operator, corporate infrastructure, or commercial monetization.
