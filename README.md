@@ -18,6 +18,11 @@ When started, the node generates a key pair, creates a file for storing events, 
 
 Each node runs a minimal set of services for exchanging data blocks, verifying integrity, and relaying requests, without requiring specialized hardware or permanent connections. Data is stored as immutable chunks distributed across the network based on their demand rather than ownership - the more frequently content is requested, the more copies of it are stored. Nodes are identified only by cryptographic keys, which allow verifying authenticity but not tracking the origin. Synchronization occurs asynchronously, without centralized time or coordination - each node accepts changes if they pass the trust chain check and match the commonly accepted logic. No access rights, administrative commands, or moderators exist - decisions about what is valid are made by consensus through repeated confirmation by multiple independent participants. The network does not store session history, does not track user behavior, does not collect metadata, and does not allow any node to influence the content except through direct offering of new chunks. Everything that works does so because someone needs it and has decided to contribute.
 
+## Documentation
+
+- [Narrative Identity Concept](docs/narrative-identity-concept.md) - Concept for narrative identity in decentralized storytelling systems
+- [Self-Refactoring System](docs/self-refactoring-system.md) - Documentation for the self-refactoring system implementation
+
 ## JavaScript Implementation (Ready to Run)
 
 The JavaScript implementation is ready to use out of the box:
