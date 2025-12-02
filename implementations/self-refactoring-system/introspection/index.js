@@ -1,16 +1,16 @@
-// Модуль интроспекции системы саморефакторинга
-// Считывает текущую структуру исполняемого образа ядра,
-// включая таблицы символов, графы вызовов и зависимости компонентов.
+// Introspection Module of the Self-Refactoring System
+// Reads the current structure of the kernel's executable image,
+// including symbol tables, call graphs, and component dependencies.
 
 class IntrospectionModule {
   constructor() {
-    // Инициализация модуля интроспекции
+    // Initialize the introspection module
   }
 
-  // Метод для считывания структуры исполняемого образа ядра
+  // Method for reading the structure of the kernel's executable image
   readKernelStructure() {
-    // Реализация считывания структуры ядра
-    // Возвращает объект с информацией о структуре ядра
+    // Implementation of reading the kernel structure
+    // Returns an object with information about the kernel structure
     return {
       symbolTable: [],
       callGraph: {},
@@ -18,21 +18,21 @@ class IntrospectionModule {
     };
   }
 
-  // Метод для получения таблицы символов
+  // Method for getting the symbol table
   getSymbolTable() {
-    // Реализация получения таблицы символов
+    // Implementation of getting the symbol table
     return [];
   }
 
-  // Метод для получения графа вызовов
+  // Method for getting the call graph
   getCallGraph() {
-    // Реализация получения графа вызовов
+    // Implementation of getting the call graph
     return {};
   }
 
-  // Метод для получения зависимостей компонентов
+  // Method for getting component dependencies
   getComponentDependencies() {
-    // Реализация получения зависимостей компонентов
+    // Implementation of getting component dependencies
     return {};
   }
 }

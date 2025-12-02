@@ -1,61 +1,61 @@
-# Техническое видение проекта
+# Technical Vision of the Project
 
-## Общее описание
+## General Description
 
-Проект реализует полностью децентрализованную одноранговую (P2P) среду с открытым протоколом, в которой отсутствуют выделенные серверы, центральные точки координации, административные привилегии и внешние зависимости. Все узлы равноправны: каждый может инициировать взаимодействие, хранить, реплицировать и верифицировать данные, участвовать в достижении согласия и вносить вклад в эволюцию состояния системы. Архитектура строится на принципе «никто не хостит — все хранят», что исключает наличие "хозяина" инфраструктуры и делает систему устойчивой к отказу, цензуре и захвату.
+The project implements a fully decentralized peer-to-peer (P2P) environment with an open protocol, in which there are no dedicated servers, central coordination points, administrative privileges, or external dependencies. All nodes are equal: each can initiate interaction, store, replicate and verify data, participate in achieving consensus, and contribute to the evolution of the system state. The architecture is built on the principle of "no one hosts - everyone stores," which excludes the existence of an infrastructure "owner" and makes the system resilient to failure, censorship, and capture.
 
-## Хранение данных
+## Data Storage
 
-Данные в системе представлены как неизменяемые единицы (immutable blobs), идентифицируемые криптографическими хешами. Любая модификация порождает новую версию, что обеспечивает аудируемость, предотвращает подмену и позволяет строить версионированные графы контента. Репликация происходит по принципу интереса: узлы самостоятельно выбирают, какие данные хранить, исходя из локальных правил, подписок или алгоритмических предпочтений, не полагаясь на централизованные каталоги или push-рассылки.
+Data in the system is represented as immutable units (immutable blobs) identified by cryptographic hashes. Any modification creates a new version, which ensures auditability, prevents substitution, and allows building versioned content graphs. Replication occurs based on interest: nodes independently choose which data to store based on local rules, subscriptions, or algorithmic preferences, without relying on centralized catalogs or push notifications.
 
-## Сетевой транспорт
+## Network Transport
 
-Сетевой транспорт реализуется поверх зашифрованного, анонимизирующего транспорта (например, Noise Protocol поверх onion routing или DHT с симметричным шифрованием). Все соединения точка-точка, промежуточные узлы не имеют доступа к содержимому сообщений. Идентификация участников осуществляется через криптографические ключи без привязки к IP-адресам, реальным именам или централизованным регистрам. Псевдонимность обеспечивается по умолчанию, но не является обязательной — участники могут раскрывать связи между идентификаторами добровольно.
+Network transport is implemented over an encrypted, anonymizing transport (for example, Noise Protocol over onion routing or DHT with symmetric encryption). All connections are point-to-point, intermediate nodes do not have access to the content of messages. Participant identification is carried out through cryptographic keys without binding to IP addresses, real names, or centralized registers. Pseudonymity is ensured by default, but is not mandatory - participants can voluntarily disclose connections between identifiers.
 
-## Состояние системы и согласие
+## System State and Consensus
 
-Состояние системы не хранится централизованно и не требует глобального консенсуса. Вместо единого блокчейна используется модель частичной упорядоченности событий (например, CRDT или логическая временная метка по Лэмпорту). Это позволяет масштабироваться без узких мест и обеспечивает локальную согласованность без глобальной синхронизации. Коллизии разрешаются детерминированными правилами, а не голосованием или мажоритарным выбором.
+The system state is not stored centrally and does not require global consensus. Instead of a single blockchain, a model of partial event ordering is used (for example, CRDT or logical timestamp by Lamport). This allows scaling without bottlenecks and ensures local consistency without global synchronization. Collisions are resolved by deterministic rules, not voting or majority choice.
 
-## Авторизация и безопасность
+## Authorization and Security
 
-Авторизация отсутствует в традиционном смысле. Доступ к данным контролируется не списками разрешений, а криптографией: только обладатель приватного ключа может подписать изменения в связанных с ним данных. Шифрование end-to-end применяется по умолчанию. Публичный контент доступен всем, частный — только тем, кто обладает соответствующим ключом расшифровки, переданным вне зависимости от самой системы.
+Authorization is absent in the traditional sense. Data access is controlled not by permission lists, but by cryptography: only the holder of the private key can sign changes in data associated with it. End-to-end encryption is applied by default. Public content is available to everyone, private content - only to those who possess the corresponding decryption key, transmitted independently of the system itself.
 
-## Пользовательский интерфейс
+## User Interface
 
-Пользовательский интерфейс — опциональная обёртка, не влияющая на ядро протокола. Он может быть реализован как локальное приложение, веб-клиент (с изоляцией через WebAssembly или аналоги) или даже голосовой агент. Все данные обрабатываются на устройстве пользователя; клиент не передаёт состояние на "сервер", потому что сервера не существует. Обновления интерфейса не требуют обновления системы — протокол и представление полностью разделены.
+The user interface is an optional wrapper that does not affect the core protocol. It can be implemented as a local application, web client (with isolation through WebAssembly or analogs), or even a voice agent. All data is processed on the user's device; the client does not transmit state to a "server" because servers do not exist. Interface updates do not require system updates - the protocol and presentation are completely separated.
 
-## Модерация и правила поведения
+## Moderation and Behavior Rules
 
-Система не содержит встроенных механизмов модерации, ограничения контента или "правил поведения". Это сознательный выбор: вместо контроля сверху система полагается на локальную фильтрацию, репутационные слои (опциональные и децентрализованные) и право каждого узла игнорировать или не реплицировать нежелательные данные. Это исключает возможность принудительной цензуры, но требует от участников активной медийной гигиены.
+The system does not contain built-in moderation mechanisms, content restrictions, or "behavior rules." This is a conscious choice: instead of top-down control, the system relies on local filtering, reputational layers (optional and decentralized), and the right of each node to ignore or not replicate undesirable data. This excludes the possibility of forced censorship but requires participants to actively practice media hygiene.
 
-## Экономический слой
+## Economic Layer
 
-Экономический слой (если присутствует) реализуется через внешние токены или off-chain договорённости. Внутри протокола нет нативной валюты, комиссий или механизма монетизации. Ресурсные издержки (например, хранение или пропускная способность) распределяются добровольно, без обязательных платежей. Возможна реализация P2P-баннерной сети с прозрачным распределением вознаграждений, но только при условии, что решение о показе принимает сам узел, а не центральный алгоритм.
+The economic layer (if present) is implemented through external tokens or off-chain agreements. The protocol does not have a native currency, fees, or monetization mechanism. Resource costs (for example, storage or bandwidth) are distributed voluntarily, without mandatory payments. A P2P banner network with transparent reward distribution is possible, but only if the decision to display is made by the node itself, not by a central algorithm.
 
-## Интеграция ИИ и процедурное повествование
+## AI Integration and Procedural Storytelling
 
-Система совместима с концепцией "процедурного повествования": события могут генерироваться локальными ИИ-агентами или участвовать в координированной активности (например, флешмобах), при этом каждый узел сохраняет контроль над тем, какие сценарии исполнять. ИИ рассматривается как активный участник, а не внешний оракул. Его выводы могут влиять на локальное состояние, но не на глобальное без явного согласия других узлов.
+The system is compatible with the concept of "procedural storytelling": events can be generated by local AI agents or participate in coordinated activities (for example, flash mobs), while each node retains control over which scenarios to execute. AI is considered an active participant, not an external oracle. Its conclusions can influence local state but not global state without explicit consent from other nodes.
 
-## Нарративная структура
+## Narrative Structure
 
-Архитектура допускает вложенную нарративную структуру: участники могут создавать "миры внутри миров", где одни идентификаторы выступают как персонажи в повествовании других. Связь между уровнями реализуется через ссылки на хеши, а не через жёсткую иерархию. Это позволяет строить многодвижковые вселенные (например, с Шахерезадой, Римусом и Гусыней), где переходы между слоями остаются частью повествования, а не нарушением изоляции.
+The architecture allows for nested narrative structure: participants can create "worlds within worlds" where some identifiers act as characters in the narratives of others. The connection between levels is implemented through hash references, not through rigid hierarchy. This allows building multi-layered universes (for example, with Scheherazade, Uncle Remus, and Mother Goose), where transitions between layers remain part of the narrative rather than violating isolation.
 
-## Изоляция сессий
+## Session Isolation
 
-Сессии диалога строго изолированы: каждое взаимодействие происходит в контексте, ограниченном текущим запросом и явно предоставленными данными. История предыдущих сессий не сохраняется и не влияет на новые. Это обеспечивает приватность, предсказуемость и уважение к автономии участника, позволяя ему заново определять себя в каждом новом контексте без давления "цифрового следа".
+Dialogue sessions are strictly isolated: each interaction occurs in a context limited by the current request and explicitly provided data. The history of previous sessions is not saved and does not influence new ones. This ensures privacy, predictability, and respect for participant autonomy, allowing them to redefine themselves in each new context without the pressure of a "digital footprint."
 
-## Внешние зависимости
+## External Dependencies
 
-Система не зависит от внешних API, облачных сервисов или проприетарных библиотек. Минимальная реализация должна работать на стандартном POSIX-совместимом устройстве с TCP/IP стеком. Допускается использование эмуляторов (например, SCUMMVM как плагин к PC-эмулятору) для запуска унаследованных форматов, но только если они изолированы и не нарушают принципов P2P.
+The system does not depend on external APIs, cloud services, or proprietary libraries. The minimum implementation should work on a standard POSIX-compatible device with a TCP/IP stack. The use of emulators (for example, SCUMMVM as a plugin to a PC emulator) is allowed for running legacy formats, but only if they are isolated and do not violate P2P principles.
 
-## Сообщество и аудитория
+## Community and Audience
 
-Проект признаёт маргинальную аудиторию — тех, кто участвует без ожидания выгоды, ради интереса, идеи или эксперимента — как ключевой движущей силой на ранних этапах. Эта роль не скрывается и не исключается после "успеха", а остаётся неотъемлемой частью экосистемы. Система не делит участников на "производителей" и "потребителей": каждый является одновременно и тем, и другим.
+The project recognizes the marginal audience - those who participate without expecting benefits, for the sake of interest, idea, or experiment - as a key driving force at early stages. This role is not hidden or excluded after "success" but remains an integral part of the ecosystem. The system does not divide participants into "producers" and "consumers": each is simultaneously both.
 
-## Гарантии и верификация
+## Guarantees and Verification
 
-Отказ от централизованных гарантий компенсируется прозрачностью протокола и возможностью локальной верификации. Если участник не доверяет другому узлу, он может перепроверить любое утверждение самостоятельно. Это требует от пользователей большей осознанности, но исключает необходимость слепого доверия "авторитетам".
+The rejection of centralized guarantees is compensated by protocol transparency and the possibility of local verification. If a participant does not trust another node, they can independently recheck any statement. This requires more awareness from users but eliminates the need for blind trust in "authorities."
 
-## Финальная цель
+## Final Goal
 
-Финальная цель — создание устойчивого цифрового пространства, которое не исчезает при смене власти, банкротстве компаний или смене технологических трендов. Оно живёт до тех пор, пока хотя бы два участника продолжают реплицировать хотя бы одну единицу данных. Это не "платформа", а инфраструктурный аналог устной традиции — распределённой, живучей и не подконтрольной никому.
+The final goal is to create a sustainable digital space that does not disappear with changes in power, company bankruptcies, or changes in technological trends. It lives as long as at least two participants continue to replicate at least one unit of data. This is not a "platform" but an infrastructure analog of oral tradition - distributed, resilient, and uncontrollable by anyone.

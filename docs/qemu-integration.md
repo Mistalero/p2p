@@ -1,39 +1,39 @@
-# Интеграция эмулятора QEMU в P2P-узел
+# QEMU Emulator Integration in P2P Node
 
-## Обзор
+## Overview
 
-Этот документ описывает интеграцию полнофункционального эмулятора системного уровня QEMU в P2P-узел. Цель интеграции - предоставить каждому узлу возможность запускать виртуальные машины и обмениваться их состоянием через P2P-сеть.
+This document describes the integration of a full-system-level QEMU emulator into the P2P node. The goal of integration is to provide each node with the ability to run virtual machines and exchange their state through the P2P network.
 
-## Архитектурные изменения в P2P-узле
+## Architectural Changes in P2P Node
 
-### Расширение модели событий
+### Event Model Extension
 
-Для поддержки управления виртуальными машинами будут добавлены новые типы событий:
+To support virtual machine management, new event types will be added:
 
-- `vm_create` - создание виртуальной машины
-- `vm_start` - запуск виртуальной машины
-- `vm_stop` - остановка виртуальной машины
-- `vm_pause` - пауза виртуальной машины
-- `vm_resume` - возобновление работы виртуальной машины
-- `vm_destroy` - уничтожение виртуальной машины
-- `vm_configure` - конфигурация виртуальной машины
-- `vm_snapshot` - создание снимка состояния виртуальной машины
-- `vm_restore` - восстановление из снимка состояния
-- `vm_input` - событие ввода для виртуальной машины
+- `vm_create` - creating a virtual machine
+- `vm_start` - starting a virtual machine
+- `vm_stop` - stopping a virtual machine
+- `vm_pause` - pausing a virtual machine
+- `vm_resume` - resuming a virtual machine
+- `vm_destroy` - destroying a virtual machine
+- `vm_configure` - configuring a virtual machine
+- `vm_snapshot` - creating a virtual machine state snapshot
+- `vm_restore` - restoring from a state snapshot
+- `vm_input` - input event for a virtual machine
 
-### Компоненты интеграции QEMU
+### QEMU Integration Components
 
-В узел будут добавлены следующие компоненты:
+The following components will be added to the node:
 
-1. **QEMU API Wrapper** - обертка для взаимодействия с библиотекой QEMU
-2. **VM Manager** - менеджер виртуальных машин
-3. **Media Stream Handler** - обработчик медиапотоков (видео и аудио)
-4. **Input Handler** - обработчик событий ввода
-5. **Snapshot Manager** - менеджер снимков состояния
+1. **QEMU API Wrapper** - wrapper for interacting with the QEMU library
+2. **VM Manager** - virtual machine manager
+3. **Media Stream Handler** - media stream handler (video and audio)
+4. **Input Handler** - input event handler
+5. **Snapshot Manager** - state snapshot manager
 
-## Новые типы событий для управления виртуальными машинами
+## New Event Types for Virtual Machine Management
 
-### Событие создания виртуальной машины (vm_create)
+### Virtual Machine Creation Event (vm_create)
 
 ```json
 {
@@ -52,7 +52,7 @@
 }
 ```
 
-### Событие запуска виртуальной машины (vm_start)
+### Virtual Machine Start Event (vm_start)
 
 ```json
 {
@@ -65,7 +65,7 @@
 }
 ```
 
-### Событие остановки виртуальной машины (vm_stop)
+### Virtual Machine Stop Event (vm_stop)
 
 ```json
 {
@@ -78,7 +78,7 @@
 }
 ```
 
-### Событие конфигурации виртуальной машины (vm_configure)
+### Virtual Machine Configuration Event (vm_configure)
 
 ```json
 {
@@ -96,34 +96,34 @@
 }
 ```
 
-## API для взаимодействия с эмулятором QEMU
+## API for Interacting with QEMU Emulator
 
-### Основные функции API
+### Main API Functions
 
-1. `qemu_vm_create(config)` - создание виртуальной машины
-2. `qemu_vm_start(vm_id)` - запуск виртуальной машины
-3. `qemu_vm_stop(vm_id)` - остановка виртуальной машины
-4. `qemu_vm_pause(vm_id)` - пауза виртуальной машины
-5. `qemu_vm_resume(vm_id)` - возобновление работы виртуальной машины
-6. `qemu_vm_destroy(vm_id)` - уничтожение виртуальной машины
-7. `qemu_vm_configure(vm_id, config)` - конфигурация виртуальной машины
-8. `qemu_vm_snapshot(vm_id, snapshot_name)` - создание снимка состояния
-9. `qemu_vm_restore(vm_id, snapshot_name)` - восстановление из снимка
-10. `qemu_vm_send_input(vm_id, input_event)` - отправка события ввода
+1. `qemu_vm_create(config)` - creating a virtual machine
+2. `qemu_vm_start(vm_id)` - starting a virtual machine
+3. `qemu_vm_stop(vm_id)` - stopping a virtual machine
+4. `qemu_vm_pause(vm_id)` - pausing a virtual machine
+5. `qemu_vm_resume(vm_id)` - resuming a virtual machine
+6. `qemu_vm_destroy(vm_id)` - destroying a virtual machine
+7. `qemu_vm_configure(vm_id, config)` - configuring a virtual machine
+8. `qemu_vm_snapshot(vm_id, snapshot_name)` - creating a state snapshot
+9. `qemu_vm_restore(vm_id, snapshot_name)` - restoring from a snapshot
+10. `qemu_vm_send_input(vm_id, input_event)` - sending an input event
 
-### Механизмы сохранения/восстановления состояния виртуальных машин
+### Virtual Machine State Save/Restore Mechanisms
 
-Система снимков будет реализована через QEMU API:
+The snapshot system will be implemented through the QEMU API:
 
-1. Создание снимка: `qemu_vm_snapshot(vm_id, snapshot_name)`
-2. Восстановление из снимка: `qemu_vm_restore(vm_id, snapshot_name)`
-3. Управление снимками: список, удаление, экспорт/импорт
+1. Creating a snapshot: `qemu_vm_snapshot(vm_id, snapshot_name)`
+2. Restoring from a snapshot: `qemu_vm_restore(vm_id, snapshot_name)`
+3. Snapshot management: list, delete, export/import
 
-## Передача видеопотока и аудиопотока через P2P-сеть
+## Video and Audio Stream Transmission Through P2P Network
 
-### Видеопоток
+### Video Stream
 
-Видеопоток будет передаваться как последовательность событий с кадрами:
+The video stream will be transmitted as a sequence of events with frames:
 
 ```json
 {
@@ -139,9 +139,9 @@
 }
 ```
 
-### Аудиопоток
+### Audio Stream
 
-Аудиопоток будет передаваться как последовательность событий с аудиоданными:
+The audio stream will be transmitted as a sequence of events with audio data:
 
 ```json
 {
@@ -157,9 +157,9 @@
 }
 ```
 
-## Обработка событий ввода от пользователей
+## Handling User Input Events
 
-События ввода будут передаваться через P2P-сеть как специальные события:
+Input events will be transmitted through the P2P network as special events:
 
 ```json
 {
@@ -175,43 +175,43 @@
 }
 ```
 
-## Лицензионные аспекты
+## Licensing Aspects
 
-QEMU распространяется под лицензией GPL, что накладывает ограничения на использование в проприетарных проектах. При интеграции QEMU в P2P-узел необходимо:
+QEMU is distributed under the GPL license, which imposes restrictions on use in proprietary projects. When integrating QEMU into the P2P node, it is necessary to:
 
-1. Соблюдать условия лицензии GPL
-2. Обеспечить доступ к исходному коду производных работ
-3. Учитывать лицензионные требования при распространении
+1. Comply with the terms of the GPL license
+2. Provide access to the source code of derivative works
+3. Consider licensing requirements when distributing
 
-## План реализации по этапам
+## Implementation Plan by Stages
 
-### Этап 1: Базовая интеграция QEMU
+### Stage 1: Basic QEMU Integration
 
-- Создание минимальной библиотеки QEMU
-- Разработка API обертки для базовых операций
-- Интеграция в P2P-узел
-- Тестирование запуска простой гостевой системы
+- Creating a minimal QEMU library
+- Developing an API wrapper for basic operations
+- Integrating into the P2P node
+- Testing the launch of a simple guest system
 
-### Этап 2: Расширенное управление виртуальными машинами
+### Stage 2: Advanced Virtual Machine Management
 
-- Реализация полного набора событий управления ВМ
-- Разработка VM Manager компонента
-- Интеграция с существующей системой событий P2P
+- Implementing a full set of VM management events
+- Developing the VM Manager component
+- Integrating with the existing P2P event system
 
-### Этап 3: Медиапотоки
+### Stage 3: Media Streams
 
-- Реализация передачи видеопотока через P2P-сеть
-- Реализация передачи аудиопотока через P2P-сеть
-- Оптимизация производительности передачи медиаданных
+- Implementing video stream transmission through the P2P network
+- Implementing audio stream transmission through the P2P network
+- Optimizing media data transmission performance
 
-### Этап 4: Снимки состояния и ввод
+### Stage 4: State Snapshots and Input
 
-- Реализация механизма снимков состояния
-- Интеграция обработчика событий ввода
-- Тестирование восстановления из снимков
+- Implementing the state snapshot mechanism
+- Integrating the input event handler
+- Testing restoration from snapshots
 
-### Этап 5: Оптимизация и отладка
+### Stage 5: Optimization and Debugging
 
-- Оптимизация производительности
-- Отладка стабильности
-- Тестирование в распределенной среде
+- Performance optimization
+- Stability debugging
+- Testing in a distributed environment

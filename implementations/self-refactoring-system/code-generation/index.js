@@ -1,31 +1,31 @@
-// Модуль генерации кода системы саморефакторинга
-// Применяет к полученной структуре набор формальных правил преобразования,
-// определённых в спецификации ядра, и создаёт новый валидный образ или его фрагменты.
+// Code Generation Module of the Self-Refactoring System
+// Applies a set of formal transformation rules to the obtained structure,
+// defined in the kernel specification, and creates a new valid image or its fragments.
 
 class CodeGenerationModule {
   constructor() {
-    // Инициализация модуля генерации кода
+    // Initialize the code generation module
   }
 
-  // Метод для применения правил преобразования к структуре ядра
+  // Method for applying transformation rules to the kernel structure
   applyTransformationRules(kernelStructure) {
-    // Реализация применения правил преобразования
-    // Возвращает новый валидный образ или его фрагменты
+    // Implementation of applying transformation rules
+    // Returns a new valid image or its fragments
     return {
       transformedCode: '',
       fragments: []
     };
   }
 
-  // Метод для генерации нового кода на основе структуры ядра
+  // Method for generating new code based on the kernel structure
   generateCode(kernelStructure) {
-    // Реализация генерации нового кода
+    // Implementation of generating new code
     return '';
   }
 
-  // Метод для создания фрагментов нового образа
+  // Method for creating fragments of the new image
   createImageFragments(kernelStructure) {
-    // Реализация создания фрагментов нового образа
+    // Implementation of creating fragments of the new image
     return [];
   }
 }

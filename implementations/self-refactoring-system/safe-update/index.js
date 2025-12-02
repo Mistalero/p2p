@@ -1,36 +1,36 @@
-// Модуль безопасного обновления системы саморефакторинга
-// Проверяет корректность нового кода посредством статического анализа
-// и моделирования поведения, затем атомарно заменяет целевые участки памяти
-// с сохранением работоспособности системы.
+// Safe Update Module of the Self-Refactoring System
+// Verifies the correctness of the new code through static analysis
+// and behavior modeling, then atomically replaces target memory segments
+// while maintaining system operability.
 
 class SafeUpdateModule {
   constructor() {
-    // Инициализация модуля безопасного обновления
-    this.backupStorage = {}; // Хранилище для контрольных копий
+    // Initialize the safe update module
+    this.backupStorage = {}; // Storage for backup copies
   }
 
-  // Метод для проверки корректности нового кода
+  // Method for validating the new code
   validateNewCode(newCode) {
-    // Реализация статического анализа и моделирования поведения
-    // Возвращает true, если код корректен, и false в противном случае
+    // Implementation of static analysis and behavior modeling
+    // Returns true if the code is valid, false otherwise
     return true;
   }
 
-  // Метод для создания контрольной копии блоков памяти
+  // Method for creating backup copies of memory blocks
   createBackup(memoryBlocks) {
-    // Реализация создания контрольной копии
-    // Сохраняет копии в this.backupStorage
+    // Implementation of creating backup copies
+    // Saves copies to this.backupStorage
   }
 
-  // Метод для атомарной замены целевых участков памяти
+  // Method for atomically replacing target memory segments
   replaceMemorySegments(targetSegments, newCode) {
-    // Реализация атомарной замены участков памяти
-    // В случае ошибки выполняет откат из резервного состояния
+    // Implementation of atomically replacing memory segments
+    // In case of error, performs rollback from backup state
   }
 
-  // Метод для отката изменений в случае нарушения инвариантов
+  // Method for rolling back changes in case of invariant violations
   rollbackChanges() {
-    // Реализация отката изменений из резервного состояния
+    // Implementation of rolling back changes from backup state
   }
 }
 
