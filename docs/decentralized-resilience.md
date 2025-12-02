@@ -1,112 +1,112 @@
-# Устойчивость децентрализованных систем: Понимание надежности без центра
+# Resilience of Decentralized Systems: Understanding Reliability Without a Center
 
-## Введение
+## Introduction
 
-Многие люди привыкли к цифровым сервисам, которые "гарантированы" крупными корпорациями. Мы ожидаем, что Google, Amazon или Microsoft обеспечат непрерывную работу сервисов, потому что у них есть дата-центры, резервные системы и профессиональные команды поддержки. Но что происходит, когда компания исчезает, серверы отключаются, или система подвергается атаке? Традиционные сервисы могут просто перестать работать.
+Many people are accustomed to digital services that are "guaranteed" by large corporations. We expect Google, Amazon, or Microsoft to ensure continuous service operation because they have data centers, backup systems, and professional support teams. But what happens when a company disappears, servers are disconnected, or the system is attacked? Traditional services may simply stop working.
 
-Децентрализованные системы предлагают другой подход — устойчивость через распределение, а не резервирование. Вместо того чтобы полагаться на центральный сервер или компанию, система остается работоспособной благодаря вкладу каждого участника. Но как объяснить эту концепцию людям, привыкшим к "гарантиям" от корпораций?
+Decentralized systems offer a different approach—resilience through distribution, not backup. Instead of relying on a central server or company, the system remains operational thanks to the contribution of each participant. But how to explain this concept to people accustomed to "guarantees" from corporations?
 
-## Повседневные аналогии
+## Everyday Analogies
 
-### Библиотеки и книжные фонды
+### Libraries and Book Collections
 
-Представьте себе книгу, которая существует в тысячах экземпляров по всему миру — в библиотеках, книжных магазинах, личных коллекциях. Даже если все книжные магазины закроются, а все библиотеки, кроме одной, сгорят, книга продолжит существовать. Более того, чем больше экземпляров книги существует, тем выше шансы, что она переживет катастрофы. В децентрализованной системе каждый участник — как библиотека, хранящая копию информации.
+Imagine a book that exists in thousands of copies around the world—in libraries, bookstores, and personal collections. Even if all bookstores close and all libraries except one burn down, the book continues to exist. Moreover, the more copies of the book exist, the higher the chances it will survive disasters. In a decentralized system, each participant is like a library storing a copy of the information.
 
-### Устные традиции и фольклор
+### Oral Traditions and Folklore
 
-Устные традиции передаются из поколения в поколение без центрального архива. Истории, песни, рецепты сохраняются не потому, что они записаны в одном месте, а потому, что их помнят и передают люди. Даже если один рассказчик забудет историю, другие могут вспомнить её. Иногда истории изменяются при передаче, но их суть сохраняется. В децентрализованной системе информация также передается от узла к узлу, и чем больше узлов её хранят, тем выше вероятность её сохранности.
+Oral traditions are passed down from generation to generation without a central archive. Stories, songs, recipes are preserved not because they are written in one place, but because people remember and pass them on. Even if one storyteller forgets a story, others may recall it. Sometimes stories change during transmission, but their essence is preserved. In a decentralized system, information is also transmitted from node to node, and the more nodes store it, the higher the probability of its preservation.
 
-### Научное сообщество и рецензирование
+### Scientific Community and Peer Review
 
-Научные знания не зависят от одной лаборатории или одного ученого. Они существуют в коллективной памяти научного сообщества. Исследования публикуются, рецензируются, воспроизводятся другими исследователями. Если одна лаборатория исчезает, знания, полученные в ней, продолжают жить в публикациях и в работах других ученых. В децентрализованной системе каждый узел может проверить и подтвердить информацию, как рецензент в научном сообществе.
+Scientific knowledge does not depend on one laboratory or one scientist. It exists in the collective memory of the scientific community. Research is published, peer-reviewed, and reproduced by other researchers. If one laboratory disappears, the knowledge gained in it continues to live in publications and the work of other scientists. In a decentralized system, each node can verify and confirm information, like a reviewer in the scientific community.
 
-### Семейные рецепты и традиции
+### Family Recipes and Traditions
 
-Семейные рецепты передаются из поколения в поколение. Они не хранятся в одном месте, а существуют в памяти членов семьи. Даже если один член семьи забудет рецепт, другой может вспомнить его. Иногда рецепты немного изменяются при передаче, но их суть сохраняется. В децентрализованной системе информация также передается от узла к узлу, и чем больше узлов её хранят, тем выше вероятность её сохранности.
+Family recipes are passed down from generation to generation. They are not stored in one place, but exist in the memory of family members. Even if one family member forgets a recipe, another may recall it. Sometimes recipes slightly change during transmission, but their essence is preserved. In a decentralized system, information is also transmitted from node to node, and the more nodes store it, the higher the probability of its preservation.
 
-## Отличие от традиционных систем
+## Difference from Traditional Systems
 
-### Централизованные системы: Гарантии через контроль
+### Centralized Systems: Guarantees Through Control
 
-В традиционных системах надежность обеспечивается через централизованный контроль:
-- Единая точка ответственности (компания, сервер)
-- Профессиональные команды мониторинга и поддержки
-- Резервные системы и дата-центры
-- Гарантии доступности и производительности
-- Возможность восстановления из центральных резервных копий
+In traditional systems, reliability is ensured through centralized control:
+- Single point of responsibility (company, server)
+- Professional monitoring and support teams
+- Backup systems and data centers
+- Availability and performance guarantees
+- Ability to recover from central backups
 
-Однако такие системы уязвимы:
-- Выход из строя центрального сервера останавливает всю систему
-- Компания может прекратить существование
-- Цензура и контроль со стороны владельца
-- Зависимость от инфраструктуры владельца
+However, such systems are vulnerable:
+- Failure of the central server stops the entire system
+- Company may cease to exist
+- Censorship and control by the owner
+- Dependence on the owner's infrastructure
 
-### Децентрализованные системы: Устойчивость через распределение
+### Decentralized Systems: Resilience Through Distribution
 
-В децентрализованных системах надежность обеспечивается через распределение:
-- Нет единой точки отказа
-- Каждый участник одновременно пользователь и хранитель
-- Устойчивость к выходу отдельных участников
-- Независимость от центрального оператора
-- Самоорганизация и адаптация к изменениям
+In decentralized systems, reliability is ensured through distribution:
+- No single point of failure
+- Each participant is simultaneously a user and keeper
+- Resilience to the departure of individual participants
+- Independence from a central operator
+- Self-organization and adaptation to changes
 
-## Преимущества устойчивости без центра
+## Benefits of Resilience Without a Center
 
-### Независимость от корпораций
+### Independence from Corporations
 
-Система продолжает функционировать независимо от того, существует ли компания-создатель или нет. Это как язык или культура — они существуют независимо от того, кто их когда-то создал.
+The system continues to function regardless of whether the creator company exists or not. This is like language or culture—they exist independently of who created them.
 
-### Устойчивость к цензуре
+### Resilience to Censorship
 
-Поскольку нет центрального сервера, нет возможности "отключить" систему или удалить контент по решению одной организации. Контент исчезает только тогда, когда перестают его хранить все участники.
+Since there is no central server, there is no way to "shut down" the system or delete content based on one organization's decision. Content disappears only when all participants stop storing it.
 
-### Адаптация к изменениям
+### Adaptation to Changes
 
-Система может адаптироваться к изменениям в сетевой топологии, количеству участников и другим переменным. Она продолжает функционировать даже при разделении сети на изолированные сегменты.
+The system can adapt to changes in network topology, number of participants, and other variables. It continues to function even when the network is divided into isolated segments.
 
-### Социальная устойчивость
+### Social Resilience
 
-Устойчивость обеспечивается не техническими средствами, а интересом сообщества к сохранению информации. Чем больше людей заинтересованы в сохранении контента, тем выше вероятность его выживания.
+Resilience is ensured not by technical means, but by the community's interest in preserving information. The more people interested in preserving content, the higher the probability of its survival.
 
-## Повседневные примеры устойчивости
+## Everyday Examples of Resilience
 
-### BitTorrent и обмен файлами
+### BitTorrent and File Sharing
 
-Сеть BitTorrent продолжает функционировать независимо от трекеров. Даже если центральный трекер отключится, пользователи могут находить друг друга через DHT (Distributed Hash Table) и продолжать обмениваться файлами.
+The BitTorrent network continues to function independently of trackers. Even if the central tracker is disconnected, users can find each other through DHT (Distributed Hash Table) and continue exchanging files.
 
-### Интернет и протоколы TCP/IP
+### Internet and TCP/IP Protocols
 
-Интернет был спроектирован как сеть без центральной точки отказа. Даже при локальных разрушениях (например, обрыв кабеля), трафик автоматически перенаправляется по другим маршрутам.
+The Internet was designed as a network without a central point of failure. Even with local destructions (for example, cable breaks), traffic is automatically redirected through other routes.
 
-### DNS и распределенные системы имен
+### DNS and Distributed Naming Systems
 
-Система доменных имен (DNS) распределена по множеству серверов по всему миру. Даже если один DNS-сервер выйдет из строя, система продолжит функционировать.
+The domain name system (DNS) is distributed across many servers around the world. Even if one DNS server fails, the system continues to function.
 
-## Как объяснить это обычным пользователям?
+## How to Explain This to Ordinary Users?
 
-### Фокус на выгодах, а не на технологии
+### Focus on Benefits, Not Technology
 
-Вместо того чтобы объяснять криптографические хеши и распределенные графы, лучше говорить о выгодах:
-- "Ваша информация не исчезнет, если компания закроется"
-- "Вы не зависите от решений одной организации"
-- "Система продолжит работать, даже если часть участников выйдет"
+Instead of explaining cryptographic hashes and distributed graphs, it's better to talk about benefits:
+- "Your information won't disappear if the company closes"
+- "You don't depend on decisions by one organization"
+- "The system will continue to work even if some participants leave"
 
-### Использование знакомых метафор
+### Use Familiar Metaphors
 
-- "Как библиотека, где каждая книга существует в тысячах экземпляров"
-- "Как устная традиция, передаваемая из поколения в поколение"
-- "Как научное знание, существующее в коллективной памяти сообщества"
+- "Like a library where each book exists in thousands of copies"
+- "Like an oral tradition passed down from generation to generation"
+- "Like scientific knowledge existing in the collective memory of the community"
 
-### Показ реальных примеров
+### Show Real Examples
 
-- Показать, как работает BitTorrent
-- Продемонстрировать IPFS или другие децентрализованные системы
-- Объяснить, как работает интернет на примере маршрутизации
+- Show how BitTorrent works
+- Demonstrate IPFS or other decentralized systems
+- Explain how the Internet works using routing as an example
 
-## Заключение
+## Conclusion
 
-Устойчивость децентрализованных систем — это не просто техническая особенность, а фундаментально иной подход к организации цифрового пространства. Вместо зависимости от корпораций и центральных серверов, надежность обеспечивается сообществом участников, каждый из которых одновременно пользователь и хранитель системы.
+The resilience of decentralized systems is not just a technical feature, but a fundamentally different approach to organizing digital space. Instead of dependence on corporations and central servers, reliability is ensured by a community of participants, each of whom is simultaneously a user and keeper of the system.
 
-Эта модель может быть непривычной для людей, привыкших к "гарантиям" от корпораций, но повседневные аналогии с библиотеками, устными традициями и научным сообществом помогают понять, что надежность без центра не только возможна, но и может быть более устойчивой в долгосрочной перспективе.
+This model may be unfamiliar to people accustomed to "guarantees" from corporations, but everyday analogies with libraries, oral traditions, and the scientific community help understand that reliability without a center is not only possible but may be more resilient in the long term.
 
-Ключ к пониманию этой концепции — осознание того, что коллективная воля сообщества может заменить корпоративную волю, а интерес к сохранению информации может быть более надежным, чем резервные копии на серверах.
+The key to understanding this concept is realizing that collective community will can replace corporate will, and interest in preserving information can be more reliable than backups on servers.

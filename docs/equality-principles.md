@@ -1,75 +1,75 @@
-# Принципы равенства в децентрализованной системе
+# Principles of Equality in a Decentralized System
 
-## Общее описание
+## General Description
 
-Система строится как одноранговая сеть без центральных точек контроля, авторитета или координации. Каждый узел функционирует в равных правах: способен инициировать взаимодействие, проверять данные других узлов, участвовать в консенсусе и хранить состояние. Никакой участник не может получить привилегированный статус на основании объёма ресурсов, продолжительности участия, репутации или иных производных метрик. Равенство заложено на уровне протокола, а не обеспечивается политическими или социальными механизмами.
+The system is built as a peer-to-peer network without central points of control, authority, or coordination. Each node functions on equal terms: it can initiate interaction, verify data from other nodes, participate in consensus, and store state. No participant can gain privileged status based on resource volume, duration of participation, reputation, or other derived metrics. Equality is embedded at the protocol level, not ensured by political or social mechanisms.
 
-## Техническая реализация равенства
+## Technical Implementation of Equality
 
-### Равенство узлов
+### Node Equality
 
-Все узлы в системе имеют равные права и возможности:
-- Каждый узел может инициировать взаимодействие
-- Каждый узел может проверять данные других узлов
-- Каждый узел может участвовать в консенсусе
-- Каждый узел может хранить состояние
+All nodes in the system have equal rights and capabilities:
+- Each node can initiate interaction
+- Each node can verify data from other nodes
+- Each node can participate in consensus
+- Each node can store state
 
-Никакой узел не может получить привилегированный статус на основании:
-- Объёма ресурсов
-- Продолжительности участия
-- Репутации
-- Иных производных метрик
+No node can gain privileged status based on:
+- Volume of resources
+- Duration of participation
+- Reputation
+- Other derived metrics
 
-### Шифрование и аутентификация
+### Encryption and Authentication
 
-Все сообщения между узлами передаются в зашифрованной форме с обязательной аутентификацией отправителя по криптографическому ключу. Идентификация узла не привязана к личности, IP-адресу или аппаратной конфигурации — только к публичному ключу. Это исключает возможность дискриминации на сетевом уровне и предотвращает формирование «надёжных» или «приоритетных» маршрутов. Каждый пакет обрабатывается одинаково, независимо от источника.
+All messages between nodes are transmitted in encrypted form with mandatory sender authentication by cryptographic key. Node identification is not tied to personality, IP address, or hardware configuration—only to the public key. This excludes the possibility of discrimination at the network level and prevents the formation of "trusted" or "priority" routes. Each packet is processed equally, regardless of the source.
 
-### Консенсус
+### Consensus
 
-Консенсус достигается через асинхронный, криптографически верифицируемый протокол, не зависящий от доверия к узлам. Участие в формировании общего состояния ограничено только технической способностью поддерживать соединение и вычислять проверки. Никакие токены, стейкинг, вклады или иные формы «инвестиций» не повышают вес голоса или влияния узла. Все узлы, предложившие корректное обновление состояния в рамках текущего раунда, вносят равный вклад.
+Consensus is achieved through an asynchronous, cryptographically verifiable protocol that does not depend on trust in nodes. Participation in forming the common state is limited only by the technical ability to maintain a connection and compute checks. No tokens, staking, contributions, or other forms of "investment" increase the weight of a node's vote or influence. All nodes that proposed a correct state update within the current round make an equal contribution.
 
-### Хранение данных
+### Data Storage
 
-Хранение данных организовано по принципу избыточного, но не централизованного реплицирования. Каждый узел волен выбирать, какие фрагменты состояния он хранит, но обязан предоставлять их по запросу в рамках протокольных правил. Отказ от хранения не влечёт штрафов, но снижает локальную доступность — система полагается на коллективную устойчивость, а не на принуждение. Нет механизма «награды за хранение», так как он неизбежно породил бы иерархию по объёму вклада.
+Data storage is organized according to the principle of redundant, but not centralized replication. Each node is free to choose which state fragments it stores, but must provide them upon request within the protocol rules. Refusal to store does not incur penalties, but reduces local availability—the system relies on collective resilience, not coercion. There is no mechanism for "storage rewards," as it would inevitably create a hierarchy based on contribution volume.
 
-### Репутационные системы
+### Reputation Systems
 
-Репутационные системы, рейтинги, уровни или любые формы количественной оценки поведения участников исключены из ядра протокола. Приложения могут реализовывать локальные, пользовательские доверительные графы, но они не влияют на базовый уровень взаимодействия. Такие графы должны быть полностью опциональными, переносимыми и не иметь глобального эквивалента. Протокол оперирует только фактами (валидно/невалидно), а не оценками (хорошо/плохо).
+Reputation systems, ratings, levels, or any forms of quantitative assessment of participant behavior are excluded from the core protocol. Applications may implement local, user-defined trust graphs, but they do not affect the basic level of interaction. Such graphs must be completely optional, portable, and have no global equivalent. The protocol operates only with facts (valid/invalid), not assessments (good/bad).
 
-### Алгоритмы выбора узлов
+### Node Selection Algorithms
 
-Алгоритмы выбора узлов для участия в операциях (например, маршрутизации, подтверждения транзакций) используют криптографически безопасный источник энтропии, привязанный к текущему состоянию сети, но не к истории поведения или характеристик узлов. Это гарантирует, что вероятность участия одинакова для всех активных узлов, а не коррелирует с накопленными привилегиями.
+Node selection algorithms for participation in operations (for example, routing, transaction confirmation) use a cryptographically secure source of entropy tied to the current network state, but not to the history of behavior or node characteristics. This guarantees that the probability of participation is the same for all active nodes, and does not correlate with accumulated privileges.
 
-### Интерфейс узла
+### Node Interface
 
-Интерфейс узла предоставляет одинаковый набор возможностей всем пользователям. Нет «административных» команд, скрытых функций или API, доступных только при определённых условиях. Любой клиент, соответствующий спецификации, может реализовать полный функционал. Отсутствие технической сложности у пользователя не снижает его прав — только практическую вовлечённость.
+The node interface provides the same set of capabilities to all users. There are no "administrative" commands, hidden functions, or APIs available only under certain conditions. Any client that meets the specification can implement the full functionality. Lack of technical complexity for the user does not reduce their rights—only practical involvement.
 
-### Экономическая модель
+### Economic Model
 
-Экономическая модель (если применяется) отделена от прав доступа. Вознаграждение за участие может существовать, но оно не даёт влияния на протокольные решения. Например, плата за вычисления или хранение — это рыночный обмен ресурсами, а не приобретение голосов. Все платежи и обмены реализуются как обычные транзакции в сети, без выделения «платёжных» узлов.
+The economic model (if applied) is separated from access rights. Rewards for participation may exist, but they do not provide influence on protocol decisions. For example, payment for computation or storage is a market exchange of resources, not acquisition of votes. All payments and exchanges are implemented as regular transactions in the network, without highlighting "payment" nodes.
 
-### Обновления протокола
+### Protocol Updates
 
-Обновления протокола требуют согласия всех узлов через жёсткую совместимость (hard fork) или совместимость по умолчанию (soft fork), но ни один узел не может навязать изменения другим. Принятие новой версии — исключительно локальное решение. Это исключает появление «руководящих» групп или «официальных» релизов. Каждый узел — суверенный агент.
+Protocol updates require consensus from all nodes through hard compatibility (hard fork) or default compatibility (soft fork), but no node can impose changes on others. Accepting a new version is exclusively a local decision. This excludes the emergence of "guiding" groups or "official" releases. Each node is a sovereign agent.
 
-### Документация и терминология
+### Documentation and Terminology
 
-Документация, логи и отладочные интерфейсы не содержат терминов, подразумевающих иерархию («мастер», «слейв», «управляющий», «клиент-сервер» и т.п.). Используется нейтральная лексика: «узел», «сообщение», «запрос», «ответ». Это не формальность — это защита от концептуального уклона в сторону централизации.
+Documentation, logs, and debugging interfaces do not contain terms implying hierarchy ("master," "slave," "manager," "client-server," etc.). Neutral terminology is used: "node," "message," "request," "response." This is not a formality—it is protection against conceptual drift toward centralization.
 
-### Внешние зависимости
+### External Dependencies
 
-Для предотвращения эволюции системы в иерархическую форму в спецификации явно запрещено вводить зависимости от внешних авторитетов: реестров, сертификатов, оракулов или централизованных служб синхронизации времени. Все необходимые данные должны быть воспроизводимы из внутрисетевого состояния.
+To prevent the system's evolution into a hierarchical form, the specification explicitly prohibits introducing dependencies on external authorities: registries, certificates, oracles, or centralized time synchronization services. All necessary data must be reproducible from the intranetwork state.
 
-### Модерация и цензура
+### Moderation and Censorship
 
-Система не содержит встроенного механизма модерации, цензуры или исключения участников. Обработка недействительных или вредоносных сообщений происходит только через криптографическую проверку и отказ в распространении. Это означает, что «плохое» поведение может быть проигнорировано, но не наказано — так как наказание требует иерархии.
+The system does not contain a built-in moderation, censorship, or participant exclusion mechanism. Processing of invalid or malicious messages occurs only through cryptographic verification and refusal to propagate. This means that "bad" behavior can be ignored, but not punished—because punishment requires hierarchy.
 
-## Аналогии для понимания
+## Analogies for Understanding
 
-Для объяснения принципа равенства внешним пользователям используется аналогия с физическими законами: как гравитация действует одинаково на все массы, так и протокол одинаково обрабатывает все узлы. «Управление» здесь — это соблюдение правил, а не принятие решений. Решения принимаются локально каждым узлом; согласие возникает как эмерджентное свойство.
+To explain the principle of equality to external users, an analogy with physical laws is used: just as gravity acts equally on all masses, the protocol processes all nodes equally. "Management" here is compliance with rules, not decision-making. Decisions are made locally by each node; consensus emerges as an emergent property.
 
-## Технические требования
+## Technical Requirements
 
-Устойчивость системы обеспечивается не за счёт контроля, а за счёт избыточности, криптографии и симметрии. Это требует большей вычислительной стоимости, но исключает точки отказа и захвата. Архитектурная честность предпочтительнее эффективности, если последняя достигается через скрытую централизацию.
+System resilience is ensured not through control, but through redundancy, cryptography, and symmetry. This requires greater computational cost, but eliminates failure points and capture. Architectural honesty is preferable to efficiency if the latter is achieved through hidden centralization.
 
-Равенство — не моральный выбор, а техническое требование. Любое отклонение от него рассматривается как уязвимость. Протокол должен быть спроектирован так, чтобы внедрение иерархии стало невозможным без полного отказа от совместимости и создания новой, отдельной сети. Только так можно гарантировать долговечность и предсказуемость поведения системы в условиях неопределённости.
+Equality is not a moral choice, but a technical requirement. Any deviation from it is considered a vulnerability. The protocol must be designed so that introducing hierarchy becomes impossible without completely abandoning compatibility and creating a new, separate network. Only this way can the durability and predictability of system behavior be guaranteed under uncertainty.
