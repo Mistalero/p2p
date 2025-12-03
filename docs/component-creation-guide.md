@@ -9,6 +9,8 @@ Components in your system follow a specific structure:
 - Complex components can consist of multiple modules (subfolders)
 - Each module is implemented as a class with specific methods
 
+For detailed information about component architecture, see [Component Architecture](component-architecture.md).
+
 ## 2. Creating a New Component
 
 ### Step 1: Define Component Purpose
@@ -105,11 +107,15 @@ module.exports = TaskManager;
 2. Add documentation for your component
 3. Check compatibility with existing implementations
 
+For detailed information about component communication patterns, see [Component Communication](component-communication.md).
+
 ## 5. Testing the Component
 
 1. Create tests for your component
 2. Ensure the component works correctly in isolation
 3. Check interaction with other system components
+
+For detailed information about component testing, see [Component Testing](component-testing.md).
 
 ## 6. Documenting the Component
 
@@ -118,5 +124,18 @@ Create a README.md file in your component's folder with a description of:
 - Usage examples
 - Component API
 - Dependencies
+
+For detailed information about component documentation, see the sections below.
+
+## Additional Resources
+
+For more detailed information about specific aspects of component development, see the following documents:
+
+- [Component Architecture](component-architecture.md) - Detailed information about component architecture and lifecycle
+- [Component Communication](component-communication.md) - Patterns for component communication and interaction
+- [Component Configuration](component-configuration.md) - How to configure components and handle configuration
+- [Component Error Handling](component-error-handling.md) - Best practices for error handling and logging
+- [Component Testing](component-testing.md) - How to test components effectively
+- [Component Deployment](component-deployment.md) - How to deploy and monitor components
 
 This guide will help you create new components for your P2P node that will conform to the system architecture and be able to effectively interact with other components.
