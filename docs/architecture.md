@@ -41,6 +41,8 @@ This repository contains multiple language implementations:
 
 Each implementation follows the same protocol specification defined in `/spec/protocol.md`.
 
+For detailed information about component development, see [Components Documentation](components/README.md).
+
 ## Documentation Structure
 
 The documentation for this project is organized into several categories to help you find what you need:
@@ -50,6 +52,7 @@ The documentation for this project is organized into several categories to help 
 - **[Usage Examples](usage/)** - Examples and scenarios for using the P2P node
 - **[Contributing Guidelines](contributing/)** - Guidelines for contributing to the project
 - **[Security Documentation](security/)** - Security considerations and best practices
+- **[Components Documentation](components/README.md)** - Comprehensive guide to component development
 
 Each category contains specific guides and reference materials to help you work with the P2P node effectively.
 
@@ -119,3 +122,5 @@ To add a new language implementation:
 1. Create a new directory under `/implementations`
 2. Follow the protocol specification in `/spec/protocol.md`
 3. Ensure compatibility with existing implementations
+
+For detailed information about component development, see [Components Documentation](components/README.md).

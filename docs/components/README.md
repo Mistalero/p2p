@@ -6,6 +6,8 @@ This directory contains comprehensive documentation for developing, testing, dep
 
 Components are the fundamental building blocks of the P2P node system. Each component is designed to be language-agnostic and can be implemented in any programming language while maintaining compatibility with the overall system architecture.
 
+For a comprehensive summary of all component-related documentation, see [Components Documentation Summary](SUMMARY.md).
+
 ## Component Development Guide
 
 Start here to learn how to create components:

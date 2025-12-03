@@ -103,4 +103,6 @@ For more detailed information about specific aspects of component development, s
 - [Component Testing](component-testing.md) - How to test components using language-agnostic testing patterns
 - [Component Deployment](component-deployment.md) - How to deploy and monitor components using language-agnostic deployment patterns
 
+For a centralized overview of all component documentation, see [Components Documentation](components/README.md).
+
 This guide will help you create new components for your P2P node that will conform to the system architecture and be able to effectively interact with other components regardless of implementation language.
