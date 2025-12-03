@@ -1,39 +1,39 @@
-# Как создавать компоненты для P2P-ноды
+# How to Create Components for P2P Node
 
-На основе анализа структуры проекта и документации, вот пошаговое руководство по созданию компонентов для вашей P2P-ноды:
+Based on the analysis of the project structure and documentation, here is a step-by-step guide to creating components for your P2P node:
 
-## 1. Понимание архитектуры компонентов
+## 1. Understanding Component Architecture
 
-Компоненты в вашей системе следуют определенной структуре:
-- Каждый компонент находится в отдельной папке внутри `implementations/`
-- Сложные компоненты могут состоять из нескольких модулей (подпапок)
-- Каждый модуль реализуется как класс с определенными методами
+Components in your system follow a specific structure:
+- Each component is located in a separate folder within `implementations/`
+- Complex components can consist of multiple modules (subfolders)
+- Each module is implemented as a class with specific methods
 
-## 2. Создание нового компонента
+## 2. Creating a New Component
 
-### Шаг 1: Определите назначение компонента
-Определите, какую функцию будет выполнять ваш компонент. Например:
-- Сетевой сервис
-- Системный модуль
-- Прикладной сервис
+### Step 1: Define Component Purpose
+Determine what function your component will perform. For example:
+- Network service
+- System module
+- Application service
 
-### Шаг 2: Создайте структуру компонента
-1. Создайте новую папку в `implementations/` с названием вашего компонента
-2. Если компонент сложный, разбейте его на модули (подпапки)
-3. Для каждого модуля создайте файл `index.js` (или соответствующий файл для выбранного языка)
+### Step 2: Create Component Structure
+1. Create a new folder in `implementations/` with your component name
+2. If the component is complex, break it into modules (subfolders)
+3. Create an `index.js` file (or appropriate file for the chosen language) for each module
 
-### Шаг 3: Реализуйте функциональность компонента
-Следуйте шаблону, который можно увидеть в существующих компонентах:
+### Step 3: Implement Component Functionality
+Follow the pattern that can be seen in existing components:
 
 ```javascript
 class YourComponentModule {
   constructor() {
-    // Инициализация модуля
+    // Initialize the module
   }
 
-  // Определите методы, которые необходимы для функционирования модуля
+  // Define methods needed for module functionality
   performAction() {
-    // Реализация действия
+    // Implementation of the action
     return result;
   }
 }
@@ -41,24 +41,24 @@ class YourComponentModule {
 module.exports = YourComponentModule;
 ```
 
-### Шаг 4: Следуйте спецификации протокола
-Убедитесь, что ваш компонент соответствует спецификации протокола в `spec/protocol.md`:
-- Поддерживает асинхронное взаимодействие через события
-- Использует криптографические ключи для идентификации
-- Работает с неизменяемыми фрагментами данных
+### Step 4: Follow Protocol Specification
+Ensure your component conforms to the protocol specification in `spec/protocol.md`:
+- Supports asynchronous interaction through events
+- Uses cryptographic keys for identification
+- Works with immutable data chunks
 
-### Шаг 5: Обеспечьте совместимость
-Убедитесь, что ваш компонент может взаимодействовать с другими компонентами системы:
-- Использует стандартные форматы сообщений
-- Поддерживает асинхронную работу
-- Следует принципам децентрализации
+### Step 5: Ensure Compatibility
+Ensure your component can interact with other system components:
+- Uses standard message formats
+- Supports asynchronous operation
+- Follows decentralization principles
 
-## 3. Пример создания простого компонента
+## 3. Example of Creating a Simple Component
 
-Допустим, вы хотите создать компонент для управления задачами:
+Let's say you want to create a task management component:
 
-1. Создайте папку `implementations/task-manager/`
-2. В этой папке создайте файл `index.js`:
+1. Create a folder `implementations/task-manager/`
+2. In this folder, create a file `index.js`:
 
 ```javascript
 class TaskManager {
@@ -99,24 +99,24 @@ class TaskManager {
 module.exports = TaskManager;
 ```
 
-## 4. Интеграция компонента в систему
+## 4. Integrating the Component into the System
 
-1. Убедитесь, что ваш компонент может быть импортирован другими частями системы
-2. Добавьте документацию к вашему компоненту
-3. Проверьте совместимость с существующими реализациями
+1. Ensure your component can be imported by other parts of the system
+2. Add documentation for your component
+3. Check compatibility with existing implementations
 
-## 5. Тестирование компонента
+## 5. Testing the Component
 
-1. Создайте тесты для вашего компонента
-2. Убедитесь, что компонент корректно работает в изоляции
-3. Проверьте взаимодействие с другими компонентами системы
+1. Create tests for your component
+2. Ensure the component works correctly in isolation
+3. Check interaction with other system components
 
-## 6. Документирование компонента
+## 6. Documenting the Component
 
-Создайте файл README.md в папке вашего компонента с описанием:
-- Назначения компонента
-- Примеров использования
-- API компонента
-- Зависимостей
+Create a README.md file in your component's folder with a description of:
+- Component purpose
+- Usage examples
+- Component API
+- Dependencies
 
-Это руководство поможет вам создавать новые компоненты для вашей P2P-ноды, которые будут соответствовать архитектуре системы и смогут эффективно взаимодействовать с другими компонентами.
+This guide will help you create new components for your P2P node that will conform to the system architecture and be able to effectively interact with other components.
