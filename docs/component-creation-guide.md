@@ -2,6 +2,16 @@
 
 Based on the analysis of the project structure and documentation, here is a step-by-step guide to creating components for your P2P node:
 
+## Language Independence Principle
+
+One of the core principles of component design in this system is **language independence**. Components should be designed to be implementable in any programming language while maintaining compatibility with the overall system architecture. This approach ensures maximum flexibility and allows developers to use the most appropriate language for each specific component.
+
+Key benefits of language independence:
+- Maximum flexibility in technology choices
+- Ability to use the best language for each specific task
+- Easier maintenance and evolution of individual components
+- Broader developer community participation
+
 ## 1. Understanding Component Architecture
 
 Components in your system follow a specific structure:
@@ -19,29 +29,17 @@ Determine what function your component will perform. For example:
 - System module
 - Application service
 
+Consider language-agnostic design principles when defining component purpose.
+
 ### Step 2: Create Component Structure
 1. Create a new folder in `implementations/` with your component name
 2. If the component is complex, break it into modules (subfolders)
-3. Create an `index.js` file (or appropriate file for the chosen language) for each module
+3. Create an implementation file with appropriate extension for your chosen language
 
 ### Step 3: Implement Component Functionality
-Follow the pattern that can be seen in existing components:
+Follow the language-agnostic pattern that can be implemented in any programming language:
 
-```javascript
-class YourComponentModule {
-  constructor() {
-    // Initialize the module
-  }
-
-  // Define methods needed for module functionality
-  performAction() {
-    // Implementation of the action
-    return result;
-  }
-}
-
-module.exports = YourComponentModule;
-```
+For detailed information about language-agnostic implementation patterns, see [Component Architecture](component-architecture.md).
 
 ### Step 4: Follow Protocol Specification
 Ensure your component conforms to the protocol specification in `spec/protocol.md`:
@@ -54,52 +52,13 @@ Ensure your component can interact with other system components:
 - Uses standard message formats
 - Supports asynchronous operation
 - Follows decentralization principles
+- Maintains language independence
 
 ## 3. Example of Creating a Simple Component
 
-Let's say you want to create a task management component:
+Let's say you want to create a task management component. You can implement it in any supported language:
 
-1. Create a folder `implementations/task-manager/`
-2. In this folder, create a file `index.js`:
-
-```javascript
-class TaskManager {
-  constructor() {
-    this.tasks = [];
-  }
-
-  createTask(description) {
-    const task = {
-      id: this.generateId(),
-      description,
-      status: 'pending',
-      createdAt: Date.now()
-    };
-    this.tasks.push(task);
-    return task.id;
-  }
-
-  completeTask(taskId) {
-    const task = this.tasks.find(t => t.id === taskId);
-    if (task) {
-      task.status = 'completed';
-      task.completedAt = Date.now();
-      return true;
-    }
-    return false;
-  }
-
-  getTasks() {
-    return this.tasks;
-  }
-
-  generateId() {
-    return Math.random().toString(36).substr(2, 9);
-  }
-}
-
-module.exports = TaskManager;
-```
+For implementation examples in different languages, see [Component Architecture](component-architecture.md).
 
 ## 4. Integrating the Component into the System
 
@@ -107,15 +66,15 @@ module.exports = TaskManager;
 2. Add documentation for your component
 3. Check compatibility with existing implementations
 
-For detailed information about component communication patterns, see [Component Communication](component-communication.md).
+For detailed information about language-agnostic component communication patterns, see [Component Communication](component-communication.md).
 
 ## 5. Testing the Component
 
-1. Create tests for your component
+1. Create tests for your component using language-agnostic test patterns
 2. Ensure the component works correctly in isolation
 3. Check interaction with other system components
 
-For detailed information about component testing, see [Component Testing](component-testing.md).
+For detailed information about language-agnostic component testing, see [Component Testing](component-testing.md).
 
 ## 6. Documenting the Component
 
@@ -127,15 +86,21 @@ Create a README.md file in your component's folder with a description of:
 
 For detailed information about component documentation, see the sections below.
 
+## 7. Deploying the Component
+
+Deploy your component using language-agnostic deployment patterns:
+
+For detailed information about language-agnostic component deployment, see [Component Deployment](component-deployment.md).
+
 ## Additional Resources
 
 For more detailed information about specific aspects of component development, see the following documents:
 
-- [Component Architecture](component-architecture.md) - Detailed information about component architecture and lifecycle
-- [Component Communication](component-communication.md) - Patterns for component communication and interaction
-- [Component Configuration](component-configuration.md) - How to configure components and handle configuration
-- [Component Error Handling](component-error-handling.md) - Best practices for error handling and logging
-- [Component Testing](component-testing.md) - How to test components effectively
-- [Component Deployment](component-deployment.md) - How to deploy and monitor components
+- [Component Architecture](component-architecture.md) - Detailed information about component architecture and lifecycle with language-agnostic implementation patterns
+- [Component Communication](component-communication.md) - Language-agnostic patterns for component communication and interaction
+- [Component Configuration](component-configuration.md) - How to configure components in a language-agnostic way
+- [Component Error Handling](component-error-handling.md) - Language-agnostic best practices for error handling and logging
+- [Component Testing](component-testing.md) - How to test components using language-agnostic testing patterns
+- [Component Deployment](component-deployment.md) - How to deploy and monitor components using language-agnostic deployment patterns
 
-This guide will help you create new components for your P2P node that will conform to the system architecture and be able to effectively interact with other components.
+This guide will help you create new components for your P2P node that will conform to the system architecture and be able to effectively interact with other components regardless of implementation language.
