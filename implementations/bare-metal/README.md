@@ -10,7 +10,7 @@ The bare-metal implementation provides a minimal operating system environment th
 - Minimal memory footprint (50-100MB)
 - Microsecond network latencies
 - 100% CPU availability for P2P logic
-- Forth-like self-modifying environment
+- Self-reflexive architecture with unified code/data space
 
 ## Architecture
 
@@ -19,11 +19,10 @@ The implementation follows a modular design with the following components:
 ### Core Components
 - **Bootloader**: Custom bootloader for x86-64 systems
 - **Kernel**: Minimal kernel with memory management and interrupt handling
-- **Drivers**: Hardware drivers for network cards and storage
-- **Network Stack**: Simplified TCP/IP stack optimized for P2P communication
-- **P2P Protocol**: Custom P2P protocol implementation over UDP
-- **Storage**: Direct block storage management on NVMe devices
-- **Forth VM**: Self-modifying environment for dynamic code execution
+- **Reflexive Architecture**: Self-reflexive objects with unified code/data space
+- **Dynamic Loader**: Runtime module loading and unloading
+- **Forth VM**: Integrated Forth-like environment for self-modification
+- **Metasystem**: Metadata management for all system components
 
 ### Hardware Requirements
 - **CPU**: x86-64 with SSE4.2, AES-NI (optional)
@@ -38,44 +37,44 @@ bare-metal/
 ├── bootloader/          # Bootloader implementation
 ├── kernel/             # Kernel core components
 │   ├── bootloader.asm  # Bootloader assembly code
-│   ├── boot.s          # Boot code
-│   └── kernel.c        # Kernel main
+│   ├── boot.s         # Boot code
+│   └── kernel.c       # Kernel main
+├── core/              # Core reflexive architecture
+│   ├── reflexive_object.h  # Self-reflexive object interface
+│   ├── reflexive_object.c
+│   ├── memory_space.h      # Unified memory space
+│   ├── memory_space.c
+│   ├── metasystem.h        # Metadata management
+│   ├── metasystem.c
+│   ├── dynamic_loader.h   # Dynamic module loading
+│   └── dynamic_loader.c
 ├── drivers/            # Hardware drivers
-│   ├── e1000.c         # e1000 network driver
-│   ├── nvme.c          # NVMe storage driver
-│   └── drivers.c       # Driver initialization
-├── network/            # Network stack implementation
-│   └── network.c       # Network functions
-├── p2p/                # P2P protocol implementation
-│   └── p2p.c           # P2P functions
-├── storage/            # Block storage management
-│   ├── block_storage.c # Block storage implementation
-│   └── block_manager.c  # Existing block manager
-├── crypto/            # Cryptographic functions
-│   └── crypto.c       # Simple crypto implementation
-├── forth/             # Forth-like environment
-│   ├── forth.c        # Forth VM implementation
-│   └── forth_example.c # Forth example usage
-├── include/            # Header files
-│   ├── kernel.h        # Kernel headers
-│   ├── memory.h         # Memory management
-│   ├── interrupts.h    # Interrupt handling
-│   ├── drivers.h       # Driver interfaces
-│   ├── network.h        # Network stack
-│   ├── p2p.h           # P2P protocol
-│   ├── storage.h       # Storage management
-│   ├── crypto.h        # Cryptographic functions
-│   └── forth.h        # Forth VM
-├── lib/                # Utility libraries
-│   ├── memory.c        # Memory management
-│   ├── interrupts.c    # Interrupt handling
-│   └── terminal.c     # Terminal output
-├── tools/              # Development tools
-├── docs/               # Additional documentation
+│   ├── e1000.c        # e1000 network driver
+│   ├── nvme.c         # NVMe storage driver
+│   └── drivers.c     # Driver initialization
+├── network/           # Network stack implementation
+│   └── network.c     # Network functions
+├── p2p/               # P2P protocol implementation
+│   └── p2p.c         # P2P functions
+├── storage/           # Block storage management
+│   ├── block_storage.c  # Block storage implementation
+│   └── block_manager.c   # Existing block manager
+├── crypto/           # Cryptographic functions
+│   └── crypto.c     # Simple crypto implementation
+├── forth/            # Integrated Forth environment
+│   ├── reflexive_forth.h  # Forth VM interface
+│   └── reflexive_forth.c # Forth VM implementation
+├── include/           # Header files
+├── lib/               # Utility libraries
+│   ├── memory.c      # Memory management
+│   ├── interrupts.c  # Interrupt handling
+│   └── terminal.c   # Terminal output
+├── tools/             # Development tools
+├── docs/              # Additional documentation
 ├── tests/             # Test files
-├── example.c           # Example usage
-├── Makefile            # Build configuration
-└── README.md          # This file
+├── example.c          # Example usage
+├── Makefile           # Build configuration
+└── README.md         # This file
 
 ## Building
 
@@ -119,17 +118,17 @@ For testing on actual hardware:
 2. Boot the target machine from the USB drive
 3. Monitor output through serial console
 
-## Forth-like Environment
+## Self-Reflexive Architecture
 
-The implementation includes a Forth-like virtual machine that provides:
+The implementation includes a self-reflexive architecture that provides:
 
-- Stack-based execution model
-- Self-modifying code capabilities
-- Dynamic word definition
-- Immediate execution mode
-- Memory access primitives
+- Unified code/data address space
+- Self-reflexive objects that can inspect and modify themselves
+- Metadata management system for all components
+- Dynamic module loading and unloading
+- Integrated Forth-like environment for self-modification
 
-This environment allows the node to modify its own behavior at runtime, creating a truly self-reflexive system where code and data are unified.
+This architecture allows the node to modify its own behavior at runtime, creating a truly self-reflexive system where code and data are unified.
 
 ## Implementation Status
 
@@ -145,7 +144,9 @@ This implementation is currently in the development phase with the following com
 - [x] P2P protocol
 - [x] Cryptographic functions
 - [x] Block storage management
-- [x] Forth-like environment
+- [x] Self-reflexive architecture
+- [x] Dynamic loader
+- [x] Integrated Forth environment
 
 ## Contributing
 
