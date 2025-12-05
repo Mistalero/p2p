@@ -10,6 +10,7 @@ The bare-metal implementation provides a minimal operating system environment th
 - Minimal memory footprint (50-100MB)
 - Microsecond network latencies
 - 100% CPU availability for P2P logic
+- Forth-like self-modifying environment
 
 ## Architecture
 
@@ -22,6 +23,7 @@ The implementation follows a modular design with the following components:
 - **Network Stack**: Simplified TCP/IP stack optimized for P2P communication
 - **P2P Protocol**: Custom P2P protocol implementation over UDP
 - **Storage**: Direct block storage management on NVMe devices
+- **Forth VM**: Self-modifying environment for dynamic code execution
 
 ### Hardware Requirements
 - **CPU**: x86-64 with SSE4.2, AES-NI (optional)
@@ -51,22 +53,26 @@ bare-metal/
 │   └── block_manager.c  # Existing block manager
 ├── crypto/            # Cryptographic functions
 │   └── crypto.c       # Simple crypto implementation
+├── forth/             # Forth-like environment
+│   ├── forth.c        # Forth VM implementation
+│   └── forth_example.c # Forth example usage
 ├── include/            # Header files
 │   ├── kernel.h        # Kernel headers
 │   ├── memory.h         # Memory management
-│   ├── interrupts.h     # Interrupt handling
-│   ├── drivers.h        # Driver interfaces
+│   ├── interrupts.h    # Interrupt handling
+│   ├── drivers.h       # Driver interfaces
 │   ├── network.h        # Network stack
 │   ├── p2p.h           # P2P protocol
 │   ├── storage.h       # Storage management
-│   └── crypto.h        # Cryptographic functions
+│   ├── crypto.h        # Cryptographic functions
+│   └── forth.h        # Forth VM
 ├── lib/                # Utility libraries
 │   ├── memory.c        # Memory management
-│   ├── interrupts.c     # Interrupt handling
-│   └── terminal.c      # Terminal output
+│   ├── interrupts.c    # Interrupt handling
+│   └── terminal.c     # Terminal output
 ├── tools/              # Development tools
 ├── docs/               # Additional documentation
-├── tests/              # Test files
+├── tests/             # Test files
 ├── example.c           # Example usage
 ├── Makefile            # Build configuration
 └── README.md          # This file
@@ -113,6 +119,18 @@ For testing on actual hardware:
 2. Boot the target machine from the USB drive
 3. Monitor output through serial console
 
+## Forth-like Environment
+
+The implementation includes a Forth-like virtual machine that provides:
+
+- Stack-based execution model
+- Self-modifying code capabilities
+- Dynamic word definition
+- Immediate execution mode
+- Memory access primitives
+
+This environment allows the node to modify its own behavior at runtime, creating a truly self-reflexive system where code and data are unified.
+
 ## Implementation Status
 
 This implementation is currently in the development phase with the following components completed:
@@ -127,6 +145,7 @@ This implementation is currently in the development phase with the following com
 - [x] P2P protocol
 - [x] Cryptographic functions
 - [x] Block storage management
+- [x] Forth-like environment
 
 ## Contributing
 

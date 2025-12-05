@@ -3,6 +3,7 @@
 #include "../include/interrupts.h"
 #include "../include/drivers.h"
 #include "../include/crypto.h"
+#include "../include/forth.h"
 #include "../example.c"
 
 // Kernel entry point
@@ -20,6 +21,14 @@ void kernel_main() {
     terminal_initialize();
     terminal_writestring("Bare Metal P2P Node Kernel Started
 ");
+    
+    // Initialize Forth VM
+    forth_init();
+    terminal_writestring("Forth VM Initialized
+");
+    
+    // Run Forth example
+    forth_example_usage();
     
     // Initialize network stack
     network_init();
