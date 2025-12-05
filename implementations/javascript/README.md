@@ -65,6 +65,24 @@ This implementation features:
 - Works in offline mode
 - Uses only simple text files and network sockets
 
+### Running the libp2p Integrated Node
+
+The repository also includes an advanced P2P node implementation with libp2p integration:
+
+```bash
+cd src/libp2p-integration
+npm install
+node example.js
+```
+
+This implementation features:
+- Enhanced peer discovery with DHT, mDNS, and bootstrap lists
+- Secure communication with built-in encryption (Noise)
+- Scalable messaging with GossipSub pub/sub
+- Support for multiple transports (TCP, WebSocket, WebRTC, QUIC)
+- Integration with existing event system
+- Content-addressed data management with IPLD
+
 ## Usage
 
 ### Basic Setup
@@ -114,6 +132,31 @@ node.on('connection', (peer) => {
 })
 ```
 
+### libp2p Integration
+
+```javascript
+import { createIntegratedNode } from './src/libp2p-integration/index.js'
+
+// Create an integrated node with libp2p
+const node = await createIntegratedNode({
+  port: 3000,
+  enableDHT: true,
+  enableMDNS: true,
+  transports: ['tcp', 'websocket']
+})
+
+// Start the node
+await node.start()
+
+// Subscribe to a topic
+await node.subscribeToTopic('chat-messages', (msg) => {
+  console.log('Received message:', msg.data.toString())
+})
+
+// Publish to a topic
+await node.publishToTopic('chat-messages', 'Hello, libp2p!')
+```
+
 ## Example
 
 See `src/example.js` for a complete example of how to use the P2P layer.
@@ -121,6 +164,8 @@ See `src/example.js` for a complete example of how to use the P2P layer.
 For a ready-to-run node implementation, see `app.js` and run with `npm start`.
 
 For the simple P2P node implementation, see `p2p-node.js`.
+
+For the libp2p integrated node implementation, see `src/libp2p-integration/example.js`.
 
 ## Running Tests
 
@@ -131,6 +176,7 @@ npm test
 ## Dependencies
 
 - None (minimal implementation)
+- libp2p dependencies (for libp2p integration)
 
 ## License
 

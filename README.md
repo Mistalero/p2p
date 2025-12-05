@@ -22,6 +22,8 @@ Each node runs a minimal set of services for exchanging data blocks, verifying i
 
 - [Narrative Identity Concept](docs/narrative-identity-concept.md) - Concept for narrative identity in decentralized storytelling systems
 - [Self-Refactoring System](docs/self-refactoring-system.md) - Documentation for the self-refactoring system implementation
+- [libp2p Integration](docs/libp2p-integration.md) - Documentation for the libp2p integration
+- [Bare-Metal Node](docs/bare-metal-node.md) - Documentation for the bare-metal node implementation
 
 ## JavaScript Implementation (Ready to Run)
 
@@ -49,6 +51,24 @@ This will start a fully functional P2P node with:
 - Event log merging and deduplication
 - Event broadcasting to connected nodes
 - Offline operation support
+
+## libp2p Integration
+
+The project includes an advanced integration with libp2p, providing enhanced capabilities for peer discovery, secure communication, and scalable messaging:
+
+### Features
+- **Enhanced Peer Discovery**: DHT, mDNS, and bootstrap lists for efficient node discovery
+- **Secure Communication**: Built-in encryption (Noise) and stream multiplexing (Yamux)
+- **Scalable Messaging**: GossipSub for efficient pub/sub messaging
+- **Multiple Transports**: Support for TCP, WebSocket, WebRTC, and QUIC
+- **IPLD Integration**: Content-addressed data management with CIDs
+
+### Usage
+```bash
+cd implementations/javascript/src/libp2p-integration
+npm install
+node example.js
+```
 
 ## Self-Refactoring System
 
