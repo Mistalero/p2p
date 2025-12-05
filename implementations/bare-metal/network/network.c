@@ -1,16 +1,13 @@
 #include "../include/network.h"
+#include "../include/drivers.h"
 
 // Network stack implementation
 static int network_initialized = 0;
 
 // Initialize network stack
 void network_init() {
-    // Initialize network hardware
-    // This would typically involve:
-    // 1. Initializing the network card
-    // 2. Setting up MAC address
-    // 3. Configuring buffers for RX/TX
-    // 4. Enabling interrupts
+    // Initialize e1000 network card
+    e1000_init();
     
     network_initialized = 1;
 }
@@ -31,11 +28,8 @@ void send_packet(void* data, unsigned int length) {
         return;
     }
     
-    // Send packet through network card
-    // This would involve:
-    // 1. Copying data to TX buffer
-    // 2. Setting up descriptors
-    // 3. Notifying hardware
+    // Send packet through e1000 driver
+    e1000_send_packet(data, length);
 }
 
 // Receive a packet
@@ -44,9 +38,6 @@ void receive_packet(void* buffer, unsigned int* length) {
         return;
     }
     
-    // Receive packet from network card
-    // This would involve:
-    // 1. Checking RX buffer for packets
-    // 2. Copying data to buffer
-    // 3. Updating buffer pointers
+    // Receive packet from e1000 driver
+    e1000_receive_packet(buffer, length);
 }
