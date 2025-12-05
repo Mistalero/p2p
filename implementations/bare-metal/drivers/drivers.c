@@ -7,6 +7,9 @@ void init_drivers() {
     // Initialize network
     network_init();
     
+    // Initialize NVMe storage
+    nvme_init();
+    
     // Initialize storage
     storage_init();
 }

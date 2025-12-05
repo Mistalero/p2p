@@ -3,6 +3,7 @@
 #include "../include/interrupts.h"
 #include "../include/drivers.h"
 #include "../include/crypto.h"
+#include "../example.c"
 
 // Kernel entry point
 void kernel_main() {
@@ -25,6 +26,9 @@ void kernel_main() {
     
     // Initialize P2P node
     p2p_init();
+    
+    // Run example usage
+    example_usage();
     
     // Main event loop
     while (1) {

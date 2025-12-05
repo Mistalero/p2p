@@ -35,22 +35,41 @@ The implementation follows a modular design with the following components:
 bare-metal/
 ├── bootloader/          # Bootloader implementation
 ├── kernel/             # Kernel core components
+│   ├── bootloader.asm  # Bootloader assembly code
+│   ├── boot.s          # Boot code
+│   └── kernel.c        # Kernel main
 ├── drivers/            # Hardware drivers
-│   ├── network/        # Network card drivers
-│   ├── storage/        # Storage drivers
-│   └── timer/          # Timer drivers
-├── network/           # Network stack implementation
+│   ├── e1000.c         # e1000 network driver
+│   ├── nvme.c          # NVMe storage driver
+│   └── drivers.c       # Driver initialization
+├── network/            # Network stack implementation
+│   └── network.c       # Network functions
 ├── p2p/                # P2P protocol implementation
-├── storage/             # Block storage management
-├── crypto/             # Cryptographic functions
+│   └── p2p.c           # P2P functions
+├── storage/            # Block storage management
+│   ├── block_storage.c # Block storage implementation
+│   └── block_manager.c  # Existing block manager
+├── crypto/            # Cryptographic functions
+│   └── crypto.c       # Simple crypto implementation
 ├── include/            # Header files
+│   ├── kernel.h        # Kernel headers
+│   ├── memory.h         # Memory management
+│   ├── interrupts.h     # Interrupt handling
+│   ├── drivers.h        # Driver interfaces
+│   ├── network.h        # Network stack
+│   ├── p2p.h           # P2P protocol
+│   ├── storage.h       # Storage management
+│   └── crypto.h        # Cryptographic functions
 ├── lib/                # Utility libraries
+│   ├── memory.c        # Memory management
+│   ├── interrupts.c     # Interrupt handling
+│   └── terminal.c      # Terminal output
 ├── tools/              # Development tools
 ├── docs/               # Additional documentation
 ├── tests/              # Test files
+├── example.c           # Example usage
 ├── Makefile            # Build configuration
-└── README.md           # This file
-```
+└── README.md          # This file
 
 ## Building
 
@@ -96,18 +115,18 @@ For testing on actual hardware:
 
 ## Implementation Status
 
-This implementation is currently in the design and early development phase. The following components are planned:
+This implementation is currently in the development phase with the following components completed:
 
-- [ ] Bootloader
-- [ ] Kernel core
-- [ ] Memory management
-- [ ] Interrupt handling
-- [ ] Network drivers
-- [ ] Storage drivers
-- [ ] Network stack
-- [ ] P2P protocol
-- [ ] Cryptographic functions
-- [ ] Block storage management
+- [x] Bootloader
+- [x] Kernel core
+- [x] Memory management
+- [x] Interrupt handling
+- [x] Network drivers (e1000)
+- [x] Storage drivers (NVMe)
+- [x] Network stack
+- [x] P2P protocol
+- [x] Cryptographic functions
+- [x] Block storage management
 
 ## Contributing
 
