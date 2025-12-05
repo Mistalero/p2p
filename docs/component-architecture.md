@@ -224,3 +224,76 @@ paths:
 ```
 
 This approach ensures that components can be implemented in any language while maintaining compatibility with the overall system architecture.
+
+## Node-based Component Deployment
+
+Components in the system are deployed within nodes similar to applications. This approach provides several benefits:
+
+- Isolation of component execution from each other
+- Independent resource management for each node
+- System fault tolerance
+- Horizontal scaling of components
+
+### Node Architecture
+
+Each node represents a container for one or more components:
+
+```
+node/
+├── config/
+│   ├── node.json          # Node configuration
+│   └── components.json   # List of node components
+├── components/            # Components deployed in the node
+│   ├── component1/        # First component
+│   └── component2/       # Second component
+├── runtime/               # Node runtime environment
+│   ├── loader.js           # Component loader
+│   └── manager.js        # Lifecycle manager
+└── logs/                  # Execution logs
+```
+
+### Node Configuration
+
+Node configuration defines execution parameters and component list:
+
+```json
+{
+  "node": {
+    "id": "node-001",
+    "name": "Primary Node",
+    "version": "1.0.0"
+  },
+  "components": [
+    {
+      "id": "component1",
+      "path": "./components/component1",
+      "config": {
+        "setting1": "value1"
+      }
+    }
+  ],
+  "resources": {
+    "memory": "1GB",
+    "cpu": "1 core"
+  }
+}
+```
+
+### Node Lifecycle
+
+A node follows a lifecycle similar to components:
+1. **Initialization**: Runtime environment setup
+2. **Startup**: Component loading and startup
+3. **Operation**: Request and event processing
+4. **Shutdown**: Component shutdown and resource release
+
+### Benefits of Node-based Deployment
+
+- **Isolation**: Components run in an isolated environment
+- **Scalability**: Nodes can be scaled independently based on local requirements
+- **Fault Tolerance**: Failure of one node does not affect others in the decentralized network
+- **Autonomy**: Each node operates independently without centralized control
+- **Peer-to-Peer Communication**: Nodes communicate directly with each other in a decentralized manner
+- **Resilience**: The system continues to operate even when individual nodes fail
+
+In a fully decentralized P2P system, nodes operate autonomously without centralized management, communicating directly with each other to form a resilient network.
