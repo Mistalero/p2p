@@ -25,6 +25,7 @@ Each node runs a minimal set of services for exchanging data blocks, verifying i
 - [libp2p Integration](docs/libp2p-integration.md) - Documentation for the libp2p integration
 - [Bare-Metal Node](docs/bare-metal-node.md) - Documentation for the bare-metal node implementation
 - [Self-Assembling Node](docs/self-assembling-node.md) - Documentation for the self-assembling node architecture
+- [Artifact-Based Component](docs/artifact-component.md) - Documentation for the artifact-based component architecture
 
 ## JavaScript Implementation (Ready to Run)
 

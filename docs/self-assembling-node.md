@@ -4,6 +4,8 @@
 
 This document describes the architecture of a self-assembling node that can fully compile and assemble itself from source artifacts during deployment. These artifacts are versioned, cryptographically signed units containing logic, state, and potential future behavior. A minimal read-only BootCD receives them over the network and materializes a running node. Compilation here is not translation, but an act of embodiment: from potential to actual.
 
+For a detailed description of the artifact-based component architecture, see [Artifact-Based Component](artifact-component.md).
+
 ## Key Concepts
 
 ### Artifacts
@@ -49,7 +51,7 @@ Self-assembly is the system's ability to dynamically modify its own structure an
 
 - **Dynamic Loading**: Loading new artifacts at runtime.
 - **Component Replacement**: Replacing existing components with new versions.
-- **Behavior Modification**: Changing system behavior based on new artifacts.
+- **Behavioral Adaptation**: Adapting system behavior based on new artifacts.
 - **State Migration**: Transferring state between component versions.
 
 ## Architecture
