@@ -2,6 +2,7 @@
 #include "../include/memory.h"
 #include "../include/interrupts.h"
 #include "../include/drivers.h"
+#include "../include/crypto.h"
 
 // Kernel entry point
 void kernel_main() {
