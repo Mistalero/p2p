@@ -24,6 +24,8 @@ Each node runs a minimal set of services for exchanging data blocks, verifying i
 - [Self-Refactoring System](docs/self-refactoring-system.md) - Documentation for the self-refactoring system implementation
 - [libp2p Integration](docs/libp2p-integration.md) - Documentation for the libp2p integration
 - [Bare-Metal Node](docs/bare-metal-node.md) - Documentation for the bare-metal node implementation
+- [Self-Assembling Node](docs/self-assembling-node.md) - Documentation for the self-assembling node architecture
+- [Artifact-Based Component](docs/artifact-component.md) - Documentation for the artifact-based component architecture
 
 ## JavaScript Implementation (Ready to Run)
 
@@ -84,6 +86,34 @@ Located in `implementations/self-refactoring-system/code-generation`, this modul
 Located in `implementations/self-refactoring-system/safe-update`, this module verifies the correctness of the new code through static analysis and behavior modeling, then atomically replaces target memory segments while maintaining system operability.
 
 All operations are performed within the kernel process address space without using external tools, emulation, or privileged means not part of the system itself. A rollback mechanism is supported: before applying changes, a backup copy of the affected blocks is saved, and in case of invariant violations, execution is automatically restored from the backup state.
+
+## Artifact-Based Node Implementation
+
+This implementation explores the concept of a self-assembling node that can fully compile and assemble itself from source artifacts during deployment. These artifacts are versioned, cryptographically signed units containing logic, state, and potential future behavior.
+
+### Features
+- **Artifact Management**: Create, store, and manage versioned artifacts
+- **Artifact Storage**: Persist artifacts to disk
+- **Self-Assembling Architecture**: Foundation for a node that assembles itself from artifacts
+
+### Directory
+```bash
+cd implementations/artifact-system
+```
+
+### Structure
+```
+artifact-system/
+├── include/                 # Header files
+├── core/                   # Core implementation
+├── network/               # Network implementation
+├── crypto/                 # Cryptographic implementation
+├── example.c              # Example usage
+└── README.md              # Implementation documentation
+```
+
+### Current Status
+This implementation is in early development with core components for artifact management implemented. Network fetching and cryptographic validation are currently placeholders.
 
 ## Docker Deployment
 

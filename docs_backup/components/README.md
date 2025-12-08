@@ -1,12 +1,6 @@
 # Components Documentation
 
-## Table of Contents
-- [Overview](#overview)
-- [Component Development Guide](#component-development-guide)
-- [Language-Specific Implementation](#language-specific-implementation)
-- [Related Documentation](#related-documentation)
-- [Getting Started](#getting-started)
-- [Need Help?](#need-help)
+This directory contains comprehensive documentation for developing, testing, deploying, and maintaining components in the P2P node system.
 
 ## Overview
 

@@ -1,14 +1,5 @@
 # Design Philosophy and Principles
 
-## Table of Contents
-- [Overall Vision](#overall-vision)
-- [Architectural Principles](#architectural-principles)
-- [Principles of Durability](#principles-of-durability)
-- [Security and Privacy Principles](#security-and-privacy-principles)
-- [Governance and Autonomy Principles](#governance-and-autonomy-principles)
-- [User Experience Principles](#user-experience-principles)
-- [Conclusion](#conclusion)
-
 ## Overall Vision
 
 The system represents a decentralized digital space where all data - content, world state, interaction rules - is stored and replicated by network participants without dependence on a central operator, corporate infrastructure, or commercial monetization. The lifecycle of any information fragment is determined exclusively by interest in it from the community: as long as at least one participant stores and distributes the data, it remains available.
@@ -82,9 +73,3 @@ The fundamental principle is respect for participant autonomy. No data leaves th
 ## Conclusion
 
 It is precisely in this - its durability: not as technology, but as a space where collective will replaces corporate will. The system is designed as a decentralized digital space where all data is stored and replicated by network participants without dependence on a central operator, corporate infrastructure, or commercial monetization.
-
-## Related Documentation
-
-- [Architecture Overview](architecture.md) - System architecture and design principles
-- [Component Architecture](component-architecture.md) - Detailed information about component architecture and lifecycle
-- [Technical Vision](technical-vision.md) - Long-term technical roadmap

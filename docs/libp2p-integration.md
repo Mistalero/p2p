@@ -1,14 +1,14 @@
-# Интеграция libp2p в существующую P2P-архитектуру
+# libp2p Integration into Existing P2P Architecture
 
-## Обзор
+## Overview
 
-Этот документ описывает интеграцию libp2p в существующую архитектуру P2P-ноды для создания единой системы с общим адресным пространством, обеспечивающей лучшую производительность и масштабируемость.
+This document describes the integration of libp2p into the existing P2P node architecture to create a unified system with a shared address space, providing better performance and scalability.
 
-## Архитектура единой системы
+## Unified System Architecture
 
-### Общая структура
+### Overall Structure
 
-Система состоит из нескольких слоев, работающих в едином адресном пространстве:
+The system consists of several layers working in a unified address space:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -16,53 +16,53 @@
 │  (Business Logic, Event Processing, State Management)      │
 ├─────────────────────────────────────────────────────────────┤
 │                   libp2p Integration Layer                   │
-│  (Peer Discovery, PubSub, Content Routing, Identity)        │
+│  (Peer Discovery, PubSub, Content Routing, Identity)          │
 ├─────────────────────────────────────────────────────────────┤
 │              Existing P2P Implementation Layer             │
-│  (Identity Layer, State Sync, Transport, Event System)      │
+│  (Identity Layer, State Sync, Transport, Event System)    │
 ├─────────────────────────────────────────────────────────────┤
 │                    Network Interface Layer                  │
 │  (TCP, UDP, WebSockets, WebRTC, QUIC)                       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Компоненты системы
+### System Components
 
-#### 1. Identity Layer (Существующий)
-- DID документы на основе ключей
-- Привязка к Nostr публичным ключам
-- Совместимость с libp2p PeerID
+#### 1. Identity Layer (Existing)
+- DID documents based on keys
+- Binding to Nostr public keys
+- Compatibility with libp2p PeerID
 
-#### 2. libp2p Integration Layer (Новый)
+#### 2. libp2p Integration Layer (New)
 - Peer Discovery (DHT, mDNS, Rendezvous)
 - PubSub (GossipSub/Episub)
 - Content Routing (IPLD, CIDs)
 - Secure Channels (Noise, TLS)
 - Stream Multiplexing (Yamux, Mplex)
 
-#### 3. State Synchronization Layer (Существующий + Расширенный)
-- CRDT-based синхронизация
-- Интеграция с IPLD для хранения состояния
-- Использование CIDs для идентификации состояний
+#### 3. State Synchronization Layer (Existing + Extended)
+- CRDT-based synchronization
+- Integration with IPLD for state storage
+- Using CIDs for state identification
 
-#### 4. Transport Layer (Гибридный)
-- Сохранение существующего TCP-транспорта для совместимости
-- Добавление libp2p транспортов (TCP, UDP, WebSockets, WebRTC, QUIC)
-- Автоматическое переключение между транспортами
+#### 4. Transport Layer (Hybrid)
+- Preserving existing TCP transport for compatibility
+- Adding libp2p transports (TCP, UDP, WebSockets, WebRTC, QUIC)
+- Automatic switching between transports
 
-#### 5. Event System (Существующий + Расширенный)
-- Распределенная система событий
-- Интеграция с libp2p PubSub для широковещательной рассылки
-- Поддержка подписок на темы
+#### 5. Event System (Existing + Extended)
+- Distributed event system
+- Integration with libp2p PubSub for broadcast
+- Support for topic subscriptions
 
-## Интеграция компонентов
+## Component Integration
 
 ### Identity Integration
 
-Существующая система идентификации на основе DID будет интегрирована с libp2p PeerID:
+The existing DID-based identity system will be integrated with libp2p PeerID:
 
 ```javascript
-// Создание PeerID из существующего DID
+// Creating PeerID from existing DID
 const peerId = await createFromPubKey(didPublicKey);
 const libp2pNode = await createLibp2p({
   peerId,
@@ -78,10 +78,10 @@ const libp2pNode = await createLibp2p({
 
 ### State Synchronization with IPLD
 
-Существующая система синхронизации состояния будет расширена с использованием IPLD:
+The existing state synchronization system will be extended using IPLD:
 
 ```javascript
-// Создание IPLD блока из состояния
+// Creating IPLD block from state
 const stateBlock = {
   timestamp: Date.now(),
   author: peerId.toB58String(),
@@ -89,26 +89,26 @@ const stateBlock = {
   signature: signState(crdtState)
 };
 
-// Генерация CID для блока
+// Generating CID for block
 const cid = await dagCBOR.util.cid(stateBlock);
 
-// Сохранение блока в IPLD store
+// Storing block in IPLD store
 await ipfs.dag.put(stateBlock, { cid });
 ```
 
 ### Event System Integration
 
-Существующая система событий будет интегрирована с libp2p PubSub:
+The existing event system will be integrated with libp2p PubSub:
 
 ```javascript
-// Подписка на тему событий
+// Subscribing to event topic
 await libp2p.pubsub.subscribe('p2p-events', (msg) => {
   const event = JSON.parse(msg.data.toString());
-  // Обработка события через существующую систему
+  // Processing event through existing system
   eventSystem.processEvent(event);
 });
 
-// Публикация события
+// Publishing event
 const event = {
   timestamp: Date.now(),
   author: peerId.toB58String(),
@@ -119,63 +119,63 @@ const event = {
 await libp2p.pubsub.publish('p2p-events', JSON.stringify(event));
 ```
 
-## Преимущества интеграции
+## Integration Benefits
 
-### 1. Улучшенное обнаружение узлов
-- Использование DHT для глобального обнаружения узлов
-- Поддержка mDNS для локального обнаружения
-- Rendezvous для координированного обнаружения
+### 1. Improved Node Discovery
+- Using DHT for global node discovery
+- Support for mDNS for local discovery
+- Rendezvous for coordinated discovery
 
-### 2. Надежная передача сообщений
-- Автоматическое восстановление соединений
-- Поддержка нескольких транспортов
-- Встроенная шифрование и аутентификация
+### 2. Reliable Message Delivery
+- Automatic connection recovery
+- Support for multiple transports
+- Built-in encryption and authentication
 
-### 3. Масштабируемая широковещательная рассылка
-- GossipSub для эффективной рассылки сообщений
-- Поддержка тем и подписок
-- Контроль дублирования сообщений
+### 3. Scalable Broadcast
+- GossipSub for efficient message broadcasting
+- Support for topics and subscriptions
+- Duplicate message control
 
-### 4. Управление данными на основе контента
-- Использование CIDs для самоидентифицирующихся данных
-- IPLD для структурирования и связывания данных
-- Версионирование и неизменяемость данных
+### 4. Content-Based Data Management
+- Using CIDs for self-identifying data
+- IPLD for structuring and linking data
+- Data versioning and immutability
 
-## План реализации
+## Implementation Plan
 
-### Этап 1: Интеграция Identity (1 неделя)
-- Создание моста между DID и PeerID
-- Интеграция существующих ключей с libp2p
-- Реализация совместимости адресов
+### Phase 1: Identity Integration (1 week)
+- Creating bridge between DID and PeerID
+- Integrating existing keys with libp2p
+- Implementing address compatibility
 
-### Этап 2: Интеграция Transport (2 недели)
-- Добавление libp2p транспортов
-- Реализация гибридного транспортного слоя
-- Сохранение совместимости с существующим TCP транспортом
+### Phase 2: Transport Integration (2 weeks)
+- Adding libp2p transports
+- Implementing hybrid transport layer
+- Preserving compatibility with existing TCP transport
 
-### Этап 3: Интеграция PubSub (2 недели)
-- Интеграция libp2p PubSub с существующей системой событий
-- Реализация тем и подписок
-- Оптимизация доставки сообщений
+### Phase 3: PubSub Integration (2 weeks)
+- Integrating libp2p PubSub with existing event system
+- Implementing topics and subscriptions
+- Optimizing message delivery
 
-### Этап 4: Интеграция State Sync (2 недели)
-- Интеграция IPLD с существующей системой синхронизации
-- Реализация использования CIDs для идентификации состояний
-- Оптимизация хранения и передачи состояний
+### Phase 4: State Sync Integration (2 weeks)
+- Integrating IPLD with existing synchronization system
+- Implementing use of CIDs for state identification
+- Optimizing state storage and transmission
 
-### Этап 5: Интеграция Discovery (1 неделя)
-- Интеграция DHT для глобального обнаружения
-- Добавление mDNS для локального обнаружения
-- Реализация Rendezvous для координированного обнаружения
+### Phase 5: Discovery Integration (1 week)
+- Integrating DHT for global discovery
+- Adding mDNS for local discovery
+- Implementing Rendezvous for coordinated discovery
 
-### Этап 6: Тестирование и оптимизация (2 недели)
-- Тестирование всей интегрированной системы
-- Оптимизация производительности
-- Обеспечение обратной совместимости
+### Phase 6: Testing and Optimization (2 weeks)
+- Testing the entire integrated system
+- Performance optimization
+- Ensuring backward compatibility
 
-## Примеры использования
+## Usage Examples
 
-### Создание узла с интеграцией libp2p
+### Creating Node with libp2p Integration
 
 ```javascript
 import { createP2PNode } from './src/integrated-node.js';
@@ -193,17 +193,17 @@ const node = await createP2PNode({
 await node.start();
 ```
 
-### Работа с событиями в интегрированной системе
+### Working with Events in Integrated System
 
 ```javascript
-// Подписка на события
+// Subscribing to events
 node.on('event', (event) => {
   console.log('Received event:', event);
-  // Событие может прийти как через существующий транспорт, 
-  // так и через libp2p PubSub
+  // Event can come through existing transport 
+  // or libp2p PubSub
 });
 
-// Публикация события
+// Publishing event
 const event = {
   timestamp: Date.now(),
   author: node.getId(),
@@ -211,47 +211,47 @@ const event = {
   payload: { action: 'click', element: 'button1' }
 };
 
-// Событие будет автоматически опубликовано через все доступные механизмы
+// Event will be automatically published through all available mechanisms
 node.publishEvent(event);
 ```
 
-### Работа с состоянием через IPLD
+### Working with State through IPLD
 
 ```javascript
-// Сохранение состояния в IPLD
+// Storing state in IPLD
 const stateCID = await node.state.put({
   counter: 42,
   users: ['user1', 'user2'],
   timestamp: Date.now()
 });
 
-// Получение состояния по CID
+// Getting state by CID
 const state = await node.state.get(stateCID);
 
-// Подписка на изменения состояния
+// Subscribing to state changes
 node.state.subscribe(stateCID, (newState) => {
   console.log('State updated:', newState);
 });
 ```
 
-## Обратная совместимость
+## Backward Compatibility
 
-Интеграция будет реализована таким образом, чтобы сохранить полную обратную совместимость с существующими компонентами:
+The integration will be implemented in a way that preserves full backward compatibility with existing components:
 
-1. Все существующие API останутся без изменений
-2. Существующие транспорты продолжат работать параллельно
-3. Существующие форматы данных будут поддерживаться
-4. Существующие конфигурации будут работать без изменений
+1. All existing APIs will remain unchanged
+2. Existing transports will continue to work in parallel
+3. Existing data formats will be supported
+4. Existing configurations will work without changes
 
-## Мониторинг и отладка
+## Monitoring and Debugging
 
-Интегрированная система будет включать расширенные возможности мониторинга:
+The integrated system will include enhanced monitoring capabilities:
 
-1. Метрики производительности libp2p
-2. Статистика PubSub
-3. Информация о соединениях
-4. Статистика DHT
+1. libp2p performance metrics
+2. PubSub statistics
+3. Connection information
+4. DHT statistics
 
-## Заключение
+## Conclusion
 
-Интеграция libp2p в существующую архитектуру создаст мощную, масштабируемую и надежную P2P-систему, работающую в едином адресном пространстве. Это позволит использовать лучшие возможности обеих систем: зрелость и совместимость существующей реализации и передовые технологии libp2p для масштабирования и отказоустойчивости.
+Integrating libp2p into the existing architecture will create a powerful, scalable, and reliable P2P system operating in a unified address space. This will allow using the best features of both systems: the maturity and compatibility of the existing implementation and the advanced technologies of libp2p for scaling and fault tolerance.
