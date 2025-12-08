@@ -1,12 +1,5 @@
 # Architecture Overview
 
-## Table of Contents
-- [Node Architecture](#node-architecture)
-- [Implementation Structure](#implementation-structure)
-- [Documentation Structure](#documentation-structure)
-- [Architectural Principles](#architectural-principles)
-- [Contributing](#contributing)
-
 ## Node Architecture
 
 Each node operates as an autonomous unit that does not depend on other nodes, does not require a centralized server, and does not need registration. The node stores a local copy of events representing changes in the world and exchanges these events with other nodes directly through the network. The foundation is a TCP connection through which nodes transmit event logs to each other. Each event is a string with a timestamp, author (public key), action type, and payload.

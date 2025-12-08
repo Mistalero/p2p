@@ -1,15 +1,5 @@
 # Component Architecture
 
-## Table of Contents
-- [Understanding Component Architecture](#understanding-component-architecture)
-- [Language Independence](#language-independence)
-- [Component Types](#component-types)
-- [Component Lifecycle](#component-lifecycle)
-- [Recommended Structure](#recommended-structure)
-- [Component Implementation Pattern](#component-implementation-pattern)
-- [Language-Agnostic Communication](#language-agnostic-communication)
-- [Node-based Component Deployment](#node-based-component-deployment)
-
 ## Understanding Component Architecture
 
 Components in your system follow a specific structure:
@@ -307,10 +297,3 @@ A node follows a lifecycle similar to components:
 - **Resilience**: The system continues to operate even when individual nodes fail
 
 In a fully decentralized P2P system, nodes operate autonomously without centralized management, communicating directly with each other to form a resilient network.
-
-## Related Documentation
-
-- [Component Creation Guide](component-creation-guide.md) - Step-by-step guide to creating components
-- [Components Documentation](components/README.md) - Comprehensive guide to component development
-- [System Architecture](architecture.md) - Overall system architecture
-- [API Documentation](api/) - Complete API reference
