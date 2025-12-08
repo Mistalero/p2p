@@ -1,40 +1,40 @@
-# Архитектура P2P-системы
+# P2P System Architecture
 
-## Общее описание
+## General Description
 
-Проект реализует концепцию полностью децентрализованной реляционной базы данных с поддержкой SQL-подобного языка запросов, где каждый узел функционирует как независимый, равноправный участник P2P-сети. Архитектура построена без центрального координатора, мастер-ноды или внешнего оркестратора.
+The project implements the concept of a fully decentralized relational database with support for SQL-like query language, where each node functions as an independent, equal participant in the P2P network. The architecture is built without a central coordinator, master node, or external orchestrator.
 
-## Основные принципы
+## Core Principles
 
-1. **Полная децентрализация** - отсутствует центральный координатор, мастер-нода или внешний оркестратор
-2. **Автономность узлов** - каждый узел функционирует как независимый участник сети
-3. **Равноправие** - все узлы имеют равные права и возможности
-4. **Отказоустойчивость** - система продолжает функционировать при выходе отдельных узлов
-5. **Независимость от внешней инфраструктуры** - не требует специализированного оборудования или постоянных подключений
+1. **Full Decentralization** - no central coordinator, master node, or external orchestrator
+2. **Node Autonomy** - each node functions as an independent network participant
+3. **Equality** - all nodes have equal rights and capabilities
+4. **Fault Tolerance** - the system continues to function when individual nodes go offline
+5. **Infrastructure Independence** - does not require specialized hardware or permanent connections
 
-## Текущая реализация
+## Current Implementation
 
-### Основные компоненты
+### Main Components
 
-1. **Транспортный слой** - реализован через TCP-сервер с использованием Node.js net модуля
-2. **Хранение данных** - события хранятся в локальных файлах в формате JSON
-3. **Криптография** - используется RSA для подписи и проверки событий
-4. **Синхронизация** - обмен событиями между узлами с проверкой подписей
+1. **Transport Layer** - implemented through a TCP server using Node.js net module
+2. **Data Storage** - events are stored in local files in JSON format
+3. **Cryptography** - RSA is used for signing and verifying events
+4. **Synchronization** - event exchange between nodes with signature verification
 
-### Архитектура узла
+### Node Architecture
 
-Каждый узел состоит из трех основных компонентов:
-- **KeyManager** - управление криптографическими ключами (генерация, подпись, проверка)
-- **EventLog** - хранение и управление событиями (загрузка, сохранение, объединение)
-- **NetworkLayer** - сетевые функции (сервер, клиент, обработка сообщений)
+Each node consists of three main components:
+- **KeyManager** - cryptographic key management (generation, signing, verification)
+- **EventLog** - event storage and management (loading, saving, merging)
+- **NetworkLayer** - network functions (server, client, message handling)
 
-## Протокол обмена сообщениями
+## Message Exchange Protocol
 
-Узлы обмениваются сообщениями двух типов:
+Nodes exchange messages of two types:
 
-### 1. Синхронизация событий (event_sync)
+### 1. Event Synchronization (event_sync)
 
-При подключении нового клиента узел отправляет все свои события в формате:
+When a new client connects, the node sends all its events in the format:
 ```json
 {
   "type": "event_sync",
@@ -42,107 +42,107 @@
 }
 ```
 
-### 2. Передача новых событий (new_event)
+### 2. New Event Transmission (new_event)
 
-При добавлении нового события узел рассылает его всем подключенным узлам:
+When a new event is added, the node broadcasts it to all connected nodes:
 ```json
 {
   "type": "new_event",
   "event": {
     "timestamp": 1234567890,
-    "author": "публичный_ключ_автора",
-    "type": "тип_события",
+    "author": "author_public_key",
+    "type": "event_type",
     "payload": {}
   },
-  "signature": "подпись_события",
-  "publicKey": "публичный_ключ_автора"
+  "signature": "event_signature",
+  "publicKey": "author_public_key"
 }
 ```
 
-## Криптографические аспекты
+## Cryptographic Aspects
 
-### Генерация ключей
+### Key Generation
 
-Каждый узел при запуске генерирует пару RSA-ключей длиной 2048 бит:
-- Приватный ключ используется для подписи событий
-- Публичный ключ передается вместе с событиями для проверки подписи
+Each node generates an RSA key pair of 2048 bits when starting:
+- Private key is used for signing events
+- Public key is transmitted with events for signature verification
 
-### Подпись событий
+### Event Signing
 
-Перед отправкой события узел создает подпись от JSON-представления события:
+Before sending an event, the node creates a signature from the JSON representation of the event:
 ```json
 {
   "timestamp": 1234567890,
-  "author": "публичный_ключ_автора",
-  "type": "тип_события",
+  "author": "author_public_key",
+  "type": "event_type",
   "payload": {}
 }
 ```
 
-Подпись создается с использованием алгоритма SHA-256 и схемы RSA-PSS.
+The signature is created using the SHA-256 algorithm and RSA-PSS scheme.
 
-### Проверка подписи
+### Signature Verification
 
-При получении события узел проверяет подпись с использованием публичного ключа отправителя. Только события с корректной подписью принимаются и добавляются в локальный лог.
+When receiving an event, the node verifies the signature using the sender's public key. Only events with correct signatures are accepted and added to the local log.
 
-## Механизмы синхронизации
+## Synchronization Mechanisms
 
-### Начальная синхронизация
+### Initial Synchronization
 
-При установлении соединения между двумя узлами происходит начальная синхронизация:
-1. Подключающийся узел отправляет все свои события
-2. Принимающий узел добавляет новые события в свой лог
-3. Принимающий узел отправляет все свои события подключающемуся узлу
-4. Подключающийся узел добавляет новые события в свой лог
+When a connection is established between two nodes, initial synchronization occurs:
+1. The connecting node sends all its events
+2. The receiving node adds new events to its log
+3. The receiving node sends all its events to the connecting node
+4. The connecting node adds new events to its log
 
-### Обнаружение дубликатов
+### Duplicate Detection
 
-Для предотвращения дублирования событий используется комбинация следующих полей:
+To prevent event duplication, a combination of the following fields is used:
 - timestamp
 - author
 - type
 - payload
 
-Если все эти поля совпадают, событие считается дубликатом и не добавляется в лог.
+If all these fields match, the event is considered a duplicate and is not added to the log.
 
-### Распространение новых событий
+### New Event Propagation
 
-При добавлении нового события локально:
-1. Событие подписывается приватным ключом узла
-2. Событие добавляется в локальный лог
-3. Событие рассылается всем подключенным узлам
-4. Подключенные узлы проверяют подпись и добавляют событие в свои логи
+When a new event is added locally:
+1. The event is signed with the node's private key
+2. The event is added to the local log
+3. The event is broadcast to all connected nodes
+4. Connected nodes verify the signature and add the event to their logs
 
-### Асинхронная работа
+### Asynchronous Operation
 
-Система работает асинхронно:
-- Узлы могут функционировать без подключения к другим узлам
-- При подключении происходит синхронизация
-- Новые события распространяются по мере подключения узлов
+The system operates asynchronously:
+- Nodes can function without connecting to other nodes
+- Synchronization occurs when connections are established
+- New events are propagated as nodes connect
 
-## Соответствие описанной архитектуре
+## Compliance with Described Architecture
 
-Реализация соответствует основным принципам описанной архитектуры:
-- Отсутствует центральный координатор
-- Все узлы равноправны и автономны
-- Данные остаются на устройстве владельца
-- Репликация осуществляется через обмен событиями
-- Каждая операция подписывается цифровой подписью
-- Конфликты решаются через проверку подписей и отсеивание дубликатов
+The implementation complies with the main principles of the described architecture:
+- No central coordinator
+- All nodes are equal and autonomous
+- Data remains on the owner's device
+- Replication is carried out through event exchange
+- Each operation is signed with a digital signature
+- Conflicts are resolved through signature verification and duplicate filtering
 
-## Дополнительные реализации
+## Additional Implementations
 
-В проекте также присутствуют:
-- Интеграция с libp2p для расширенных возможностей обнаружения узлов и безопасной коммуникации
-- Система саморефакторинга
-- Артефактная система для самосборки узла
+The project also includes:
+- libp2p integration for advanced node discovery and secure communication capabilities
+- Self-refactoring system
+- Artifact system for self-assembling nodes
 
-## Возможные улучшения
+## Possible Improvements
 
-Для полного соответствия описанной архитектуре можно рассмотреть:
-- Реализацию CRDT для более эффективного разрешения конфликтов
-- Интеграцию с IPFS/Arweave для долговременного хранения
-- Поддержку более сложных запросов к данным
-- Реализацию механизма миграции схемы данных
-- Использование векторных часов для упорядочивания событий
-- Реализацию механизма garbage collection для удаления устаревших данных
+To fully comply with the described architecture, the following can be considered:
+- Implementation of CRDT for more efficient conflict resolution
+- Integration with IPFS/Arweave for long-term storage
+- Support for more complex data queries
+- Implementation of data schema migration mechanism
+- Use of vector clocks for event ordering
+- Implementation of garbage collection mechanism for removing outdated data
